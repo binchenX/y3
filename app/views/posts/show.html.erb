@@ -1,8 +1,5 @@
 <p id="notice"><%= notice %></p>
 
-
-
-
 <div class="post-header">
 
  <strong> <%= @post.title %></strong>
@@ -17,47 +14,17 @@
 <hr />
 
 <p>
-
   <%= @post.comments.size %> comments
   <hr />
 </p>
 
 
-<% @post.comments.each do |comment| %>
+<%= render @post.comments %>
 
-<div class="comment-text">
-  <p>
-    <%= comment.body %>
-  </p>
-</div>
-<div class="comment-footer">
-  <%= comment.commenter %>
-</div>
-
-<hr />
-
-
-<% end %>
 
 <h2>Add a comment:</h2>
 
-<%= form_for([@post, @post.comments.build]) do |f| %> 
-  <%= f.error_messages %>
-<div class="field">
-<%= f.label :commenter %><br />
-<%= f.text_field :commenter %>
-</div>
-
-<div class="field">
-
-  <%= f.label :body %><br />
-  <%= f.text_area :body %>
-</div>
-
-<div class="actions">
-<%= f.submit %>
-</div>
-<% end %>
+<%= render "comments/form" %>
 
 <br />
 
