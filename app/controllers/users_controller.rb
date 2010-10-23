@@ -43,14 +43,27 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
+        #session[:user] = User.authenticate(@user.login, @user.password)
+        flash[:notice] = "Registration successful"
+        #redirect_to root_url
         format.html { redirect_to(@user, :notice => 'You have successfully registed.') }
-        format.xml  { render :xml => @user, :status => :created, :location => @user }
+        #format.xml  { render :xml => @user, :status => :created, :location => @user }
       else
         format.html { render :action => "new" }
         format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
       end
     end
   end
+
+  
+
+
+
+ 
+
+
+
+
   
 
 end

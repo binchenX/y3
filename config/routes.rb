@@ -3,9 +3,17 @@ Yy::Application.routes.draw do
     resources :comments
   end
 
-  resources :users
+  
 
   get "home/index"
+
+  match 'login' => 'user_sessions#new'
+  match 'logout' => 'user_sessions#destroy'
+  
+  
+   resources :user_sessions
+  resources :users
+ 
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -56,7 +64,7 @@ Yy::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => "home#index"
+  root :to => "posts#index"
 
   # See how all your routes lay out with "rake routes"
 

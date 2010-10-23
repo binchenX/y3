@@ -115,3 +115,9 @@ div.field, div.actions {
   font-size: 12px;
   list-style: square;
 }
+
+
+#user_nav{
+    float: right;
+    font-size: 12px;
+}
