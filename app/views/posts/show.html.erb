@@ -8,7 +8,8 @@
   <%= @post.content %>
 </div>
 
-<%= @post.created_at.to_date %>
+posted at <%= @post.created_at.to_date %>
+by
 <% if @post.user %>
     <%= link_to @post.user.login, user_path(@post.user) %>
 <% else %>

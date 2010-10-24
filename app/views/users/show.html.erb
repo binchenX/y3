@@ -2,8 +2,10 @@
 
 
 <p>
-  Congratulations! <%= @user.login %> !
+  This is the Profile of <strong><%= @user.login %></strong>
 </p>
 
 
-<%= link_to 'Go and Post a news', posts_path %>
+<% if current_user == @user %>
+  <%= link_to 'edit profile', edit_user_path(:current) %>
+<% end %>

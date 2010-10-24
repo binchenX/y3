@@ -7,7 +7,14 @@
   </p>
 </div>
 <div class="comment-footer">
-  <%= comment.commenter %>
+  
+comment at <%= comment.created_at.to_date %>
+by
+<% if comment.user %>
+    <%= link_to comment.user.login, user_path(comment.user) %>
+<% else %>
+   <%= comment.commenter %> <!-- shoud be @post.username-->
+<% end %>
 </div>
 
 <hr />
