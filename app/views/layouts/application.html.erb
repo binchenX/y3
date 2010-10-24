@@ -18,6 +18,11 @@
     <%  end %>
   </div>
 
+  <div id="site_nav">
+    <%= link_to 'All Post', posts_path %>
+    <%= link_to 'New Post', new_post_path %>
+  </div>
+
 
   <%- flash.each do |name,msg| -%>
     <%= content_tag :div ,msg, :id => "flash_#{name}" %>

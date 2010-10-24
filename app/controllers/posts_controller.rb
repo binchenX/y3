@@ -42,6 +42,11 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(params[:post])
 
+    #if user has already logined int, set the user
+    if current_user
+      @post.user_id = current_user.id
+    end
+
     respond_to do |format|
       if @post.save
         format.html { redirect_to(@post, :notice => 'Post was successfully created.') }

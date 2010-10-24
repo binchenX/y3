@@ -1,18 +1,25 @@
 <p id="notice"><%= notice %></p>
 
 <div class="post-header">
-
  <strong> <%= @post.title %></strong>
-<hr />
-
-  </div>
+ <hr />
+</div>
 <div class="post-text">
   <%= @post.content %>
-
 </div>
+
+<%= @post.created_at.to_date %>
+<% if @post.user %>
+    <%= link_to @post.user.login, user_path(@post.user) %>
+<% else %>
+  <%= @post.name %> <!-- shoud be @post.username-->
+<% end %>
 
 <hr />
 
+
+
+<!-- show comments of this post -->
 <p>
   <%= @post.comments.size %> comments
   <hr />
@@ -22,12 +29,11 @@
 <%= render @post.comments %>
 
 
-<h2>Add a comment:</h2>
+<h3>Got something to say?</h3>
 
 <%= render "comments/form" %>
 
 <br />
 
-
 <%= link_to 'Edit', edit_post_path(@post) %> |
-<%= link_to 'Back', posts_path %>
+

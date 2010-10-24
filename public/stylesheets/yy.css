@@ -91,6 +91,11 @@ div.field, div.actions {
   display: table;
 }
 
+span.intive_to_register{
+  font-size: 10px;
+  font-style: italic;
+}
+
 #error_explanation {
   width: 450px;
   border: 2px solid red;
@@ -118,6 +123,11 @@ div.field, div.actions {
 
 
 #user_nav{
+    float: right;
+    font-size: 12px;
+}
+
+#site_nav{
     float: right;
     font-size: 12px;
 }

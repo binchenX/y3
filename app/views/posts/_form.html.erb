@@ -11,10 +11,17 @@
     </div>
   <% end %>
 
+<!-- if user has not login in ,should provide a name -->
+<% if current_user %>
+
+<% else %>
+
   <div class="field">
-    <%= f.label :name %><br />
+    <%= f.label :name %> <%= render "shared/register_invite" %><br />
     <%= f.text_field :name %>
   </div>
+<% end %>
+
   <div class="field">
     <%= f.label :title %><br />
     <%= f.text_field :title %>
