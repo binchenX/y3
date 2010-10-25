@@ -2,10 +2,13 @@
 
 <%= form_for([@post, @post.comments.build]) do |f| %>
   <%= f.error_messages %>
-<div class="field">
-<%= f.label :who? %><%= render "shared/register_invite" %><br />
-<%= f.text_field :commenter %>
-</div>
+
+<% if not current_user %>
+  <div class="field">
+  <%= f.label :who? %><%= render "shared/register_invite" %><br />
+   <%= f.text_field :commenter %>
+  </div>
+<% end %>
 
 <div class="field">
 
