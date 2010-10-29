@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101024120155) do
+ActiveRecord::Schema.define(:version => 20101025083052) do
 
   create_table "comments", :force => true do |t|
     t.string   "commenter"
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(:version => 20101024120155) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
+    t.integer  "vote_points", :default => 0
   end
 
   create_table "users", :force => true do |t|
@@ -39,6 +40,15 @@ ActiveRecord::Schema.define(:version => 20101024120155) do
     t.string   "password_salt"
     t.string   "crypted_password"
     t.string   "persistence_token"
+  end
+
+  create_table "votes", :force => true do |t|
+    t.boolean  "like"
+    t.integer  "user_id"
+    t.integer  "voteable_id"
+    t.string   "voteable_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end

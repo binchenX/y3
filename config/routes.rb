@@ -1,6 +1,7 @@
 Yy::Application.routes.draw do
   resources :posts do
     resources :comments
+    resources :votes
   end
 
   
@@ -11,9 +12,9 @@ Yy::Application.routes.draw do
   match 'logout' => 'user_sessions#destroy'
   
   
-   resources :user_sessions
+  resources :user_sessions
   resources :users
- 
+  #resources :votes
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

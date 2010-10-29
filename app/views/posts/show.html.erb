@@ -1,5 +1,15 @@
 <p id="notice"><%= notice %></p>
 
+
+
+<!--votes for this post -->
+
+<p>
+ <%=  vote_like_link(@post) %>
+ <span>votes:<%=  @post.vote_points %></span>
+ <!-- vote_dislike_link(@post) -->
+</p>
+
 <div class="post-header">
  <strong> <%= @post.title %></strong>
  <hr />
