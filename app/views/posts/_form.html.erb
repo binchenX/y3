@@ -28,9 +28,11 @@
   </div>
   <div class="field">
     <%= f.label :content %><br />
-    <%= f.text_field :content %>
+    <%= f.text_area :content %>
   </div>
   <div class="actions">
     <%= f.submit %>
   </div>
 <% end %>
+<div class="wmd-preview"></div>
+<script type="text/javascript" src="/javascripts/wmd.js"></script>
