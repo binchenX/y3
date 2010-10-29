@@ -131,3 +131,38 @@ span.intive_to_register{
     float: right;
     font-size: 12px;
 }
+
+.like-icon {
+    display: block;
+    background-color: transparent;
+    background-image: url(/images/like-icon.png);
+    background-repeat: no-repeat;
+
+    
+}
+
+.dislike-icon
+{
+    display: block;
+    background-color: transparent;
+    background-image: url(/images/dislike-icon.png);
+    background-repeat: no-repeat;
+
+}
+.like-icon.active
+{
+    display: block;
+    background-color: transparent;
+    background-image: url(/images/like-icon-active.png);
+    background-repeat: no-repeat;
+}
+
+.dislike-icon.active
+{
+    display: block;
+    background-color: transparent;
+    background-image: url(/images/dislike-icon-active.png);
+    background-repeat: no-repeat;
+    
+}
+

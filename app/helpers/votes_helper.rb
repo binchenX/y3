@@ -4,20 +4,20 @@ module VotesHelper
       return link_to 'Like', new_user_session_path(:return_to => request.url), :class => 'like-icon'
     end
 
-    puts "111111111111111111111"
-    #vote = voteable.vote current_user
+    vote = voteable.vote current_user
+
+    #Let's make the logical simple
+    #if the user has already vote,  no matter it is up or donw, he can not vote again
     
-    puts "222222222222222222222"
-    #if vote
-      if false #vote.
-        puts "33333333333"
-        link_to 'Like', "javascript:alert('You have voted like this best practices!');", :class => 'like-icon active'
-      else
-        #button_to 'Like', polymorphic_path([voteable, vote]), :method => :delete, :class => 'like-icon'
+    if vote
+      if vote.like? #alraedy voted like ,can not vote again
+        link_to 'Like', "javascript:alert('You have already voted. Thanks.');", :class => 'like-icon active'
+      else #cancel the vote
+        button_to 'Like', polymorphic_path([voteable, vote]), :method => :delete, :class => 'like-icon'
       end
-    #else
+    else  #user has not voted , vote like
       button_to 'Like', polymorphic_path([voteable, :votes], :like => true), :class => 'like-icon'
-    #end
+    end
   end
   
   def vote_dislike_link(voteable)

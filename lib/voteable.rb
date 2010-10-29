@@ -6,6 +6,7 @@ module Voteable
     end
   end
 
+  #return the vote issued by the ( logined ) user
   def vote(user)
     self.votes.where(:user_id => user.id).first
   end
