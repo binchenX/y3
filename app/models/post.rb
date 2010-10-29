@@ -1,9 +1,10 @@
 require 'voteable'
+require 'markdownable'
 
 class Post < ActiveRecord::Base
 
   include Voteable
-  
+  include Markdownable
   validates :title, :presence=>true
   validates :title, :presence =>true,
               :length => { :minimum => 5 }
@@ -20,3 +21,4 @@ class Post < ActiveRecord::Base
 #  end
 
 end
+

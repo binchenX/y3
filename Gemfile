@@ -9,6 +9,7 @@ gem 'sqlite3-ruby', :require => 'sqlite3'
 
 gem "authlogic", :git => "git://github.com/odorcicd/authlogic.git", :branch => "rails3"
 gem "inherited_resources", "~> 1.1.2"
+gem "rdiscount"
 # Use unicorn as the web server
 # gem 'unicorn'
 

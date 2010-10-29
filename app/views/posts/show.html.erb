@@ -15,7 +15,7 @@
  <hr />
 </div>
 <div class="post-text">
-  <%= @post.content %>
+  <%= raw(@post.html_content) %>
 </div>
 
 posted at <%= @post.created_at.to_date %>
