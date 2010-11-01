@@ -51,6 +51,7 @@ doc\:rerails=
 environment=
 log\:clear=Truncates all *.log files in log/ to zero bytes
 middleware=Prints out your Rack middleware stack
+noop=
 notes=Enumerate all annotations (use notes:optimize, :fixme, :todo for focus)
 notes\:custom=Enumerate a custom annotation, specify with ANNOTATION=CUSTOM
 notes\:fixme=
@@ -69,6 +70,17 @@ rails\:update\:scripts=
 rails_env=
 routes=Print out all defined routes in match order, with names. Target specific controller with CONTROLLER=x.
 secret=Generate a crytographically secure secret key (this is typically used to generate a secret for cookie sessions).
+spec=Run all specs in spec directory (excluding plugin specs)
+spec\:controllers=Run the code examples in spec/controllers
+spec\:helpers=Run the code examples in spec/helpers
+spec\:lib=Run the code examples in spec/lib
+spec\:mailers=Run the code examples in spec/mailers
+spec\:models=Run the code examples in spec/models
+spec\:rcov=Run all specs with rcov
+spec\:requests=Run the code examples in spec/requests
+spec\:routing=Run the code examples in spec/routing
+spec\:statsetup=
+spec\:views=Run the code examples in spec/views
 stats=Report code statistics (KLOCs, etc) from the application
 test=Runs test:units, test:functionals, test:integration together (also available: test:benchmark, test:profile, test:plugins)
 test\:benchmark=

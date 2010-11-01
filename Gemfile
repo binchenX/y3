@@ -10,6 +10,8 @@ gem 'sqlite3-ruby', :require => 'sqlite3'
 gem "authlogic", :git => "git://github.com/odorcicd/authlogic.git", :branch => "rails3"
 gem "inherited_resources", "~> 1.1.2"
 gem "rdiscount"
+gem "haml", "~> 3.0.13"
+gem "formtastic", "~> 1.1.0"
 # Use unicorn as the web server
 # gem 'unicorn'
 
@@ -30,4 +32,16 @@ gem "rdiscount"
 # and rake tasks are available in development mode:
 # group :development, :test do
 #   gem 'webrat'
+	
 # end
+
+ group  :development do
+   gem 'rspec-rails','2.0.1'
+	
+ end
+ group  :test do
+   gem "autotest-rails", "~> 4.1.0"
+   gem 'rspec', '2.0.1'	
+   gem 'webrat'
+   gem 'rspec-rails','2.0.1'
+ end
