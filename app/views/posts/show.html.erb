@@ -17,8 +17,12 @@
 <div class="post-text">
   <%= raw(@post.html_content) %>
 </div>
-<div >
-  <%= @post.tag_list %>
+<div class="post-tags">
+  <% @post.tags.each do |tag| %>
+		<div class="post-tag">
+			<%= link_to tag.name , tag_path(tag.name) %>
+		</div>
+  <% end %>
 </div>
 
 posted at <%= @post.created_at.to_date %>
