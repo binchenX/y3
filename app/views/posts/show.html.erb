@@ -17,6 +17,9 @@
 <div class="post-text">
   <%= raw(@post.html_content) %>
 </div>
+<div >
+  <%= @post.tag_list %>
+</div>
 
 posted at <%= @post.created_at.to_date %>
 by

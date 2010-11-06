@@ -1,10 +1,15 @@
 Yy::Application.routes.draw do
+  get "tag/show"
+
   resources :posts do
     resources :comments
     resources :votes
   end
 
-  
+
+  resources :tags, :only => :show
+  #resouces :tags;
+  #resouces :taggings;
 
   get "home/index"
 

@@ -37,8 +37,10 @@ GEM
       activemodel (= 3.0.0)
       activesupport (= 3.0.0)
     activesupport (3.0.0)
+    acts-as-taggable-on (2.0.6)
     arel (1.0.1)
       activesupport (~> 3.0.0)
+    autotest (4.4.1)
     autotest-rails (4.1.0)
       ZenTest
     builder (2.1.2)
@@ -109,7 +111,9 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  acts-as-taggable-on (~> 2.0.6)
   authlogic!
+  autotest
   autotest-rails (~> 4.1.0)
   formtastic (~> 1.1.0)
   haml (~> 3.0.13)

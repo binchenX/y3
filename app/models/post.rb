@@ -5,6 +5,8 @@ class Post < ActiveRecord::Base
 
   include Voteable
   include Markdownable
+
+  acts_as_taggable
   validates :title, :presence=>true
   validates :title, :presence =>true,
               :length => { :minimum => 5 }

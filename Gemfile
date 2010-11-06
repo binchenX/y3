@@ -12,6 +12,7 @@ gem "inherited_resources", "~> 1.1.2"
 gem "rdiscount"
 gem "haml", "~> 3.0.13"
 gem "formtastic", "~> 1.1.0"
+gem "acts-as-taggable-on", "~> 2.0.6"
 # Use unicorn as the web server
 # gem 'unicorn'
 
@@ -40,6 +41,7 @@ gem "formtastic", "~> 1.1.0"
 	
  end
  group  :test do
+   gem "autotest"
    gem "autotest-rails", "~> 4.1.0"
    gem 'rspec', '2.0.1'	
    gem 'webrat'
