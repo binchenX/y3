@@ -1,10 +1,9 @@
 
-%table
+
 - posts.each do |post|
-    %tr
-        %td.post-summary
-            %p= link_to post.title , post
-        %td.tags
-        - post.tags.each do |tag|
-            %p= link_to tag.name, tag_path(tag.name)
+    %div.post-summary
+        %p= link_to post.title , post
+    %div.tags
+    - post.tags.each do |tag|
+        %div.post-tag= link_to tag.name, tag_path(tag.name)
 

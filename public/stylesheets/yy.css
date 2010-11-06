@@ -72,6 +72,13 @@ color: #4A4A4A;
     
 }
 
+.post-tag{
+ display: inline;
+ font-size: 10px;
+}
+.tags{
+ font-size: 40%;
+}
 
 a { color: #000; }
 a:visited { color: #666; }
@@ -179,4 +186,6 @@ span.intive_to_register{
     border: none;
     
 }
+
+
 
