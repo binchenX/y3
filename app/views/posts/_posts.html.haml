@@ -4,6 +4,6 @@
     %div.post-summary
         %p= link_to post.title , post
     %div.tags
-    - post.tags.each do |tag|
-        %div.post-tag= link_to tag.name, tag_path(tag.name)
+        - post.tags.each do |tag|
+            %div.post-tag= link_to tag.name, tag_path(tag.name)
 
