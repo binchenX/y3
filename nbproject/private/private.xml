@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/1"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/1">
+        <file>file:/work/web/yy/app/views/posts/show.html.erb</file>
+        <file>file:/work/web/yy/app/models/comment.rb</file>
+        <file>file:/work/web/yy/app/controllers/comments_controller.rb</file>
+        <file>file:/work/web/yy/app/views/layouts/application.html.erb</file>
+        <file>file:/work/web/yy/public/stylesheets/scaffold.css</file>
+        <file>file:/work/web/yy/app/views/posts/edit.html.erb</file>
+        <file>file:/work/web/yy/public/stylesheets/yy.css</file>
+        <file>file:/work/web/yy/db/seeds.rb</file>
+        <file>file:/work/web/yy/db/schema.rb</file>
+        <file>file:/work/web/yy/db/migrate/20101021091932_create_posts.rb</file>
+    </open-files>
+</project-private>
