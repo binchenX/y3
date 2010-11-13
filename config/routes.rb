@@ -15,6 +15,7 @@ Yy::Application.routes.draw do
 
   match 'login' => 'user_sessions#new'
   match 'logout' => 'user_sessions#destroy'
+  match 'crawl' => 'happy_robot#run'
   
   
   resources :user_sessions
