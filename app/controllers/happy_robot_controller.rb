@@ -46,7 +46,7 @@ class HappyRobotController < ApplicationController
     begin
 
       puts "grab #{page_uri}"
-      doc = Nokogiri::HTML(open(page_uri), nil, "GB18030")
+      doc = Nokogiri::HTML(open(page_uri,'User-Agent' => 'ruby'), nil, "GB18030")
 
       interested_posts_in_current_page = doc.xpath('//a').select do |node|
         isPostLink? node['href'] and
