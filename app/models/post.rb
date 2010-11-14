@@ -6,6 +6,8 @@ class Post < ActiveRecord::Base
   include Voteable
   include Markdownable
 
+
+
   acts_as_taggable
   validates :title, :presence=>true
   validates :title, :presence =>true,
@@ -16,6 +18,10 @@ class Post < ActiveRecord::Base
   belongs_to :user
   has_many :votes, :as => :voteable, :dependent => :destroy
 
+
+  def self.per_page
+    30
+  end
 
 #  def vote(post)
 #    #self.votes.where(:user_id => post.id).first

@@ -1,6 +1,6 @@
 %p welcome to yaoYiyao
 = render 'posts' , :posts=>@posts
 
-
+= will_paginate @posts, :previous_label => "<< Previous", :next_label => "Next >>"
 
 
