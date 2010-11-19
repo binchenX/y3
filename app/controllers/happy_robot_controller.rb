@@ -10,26 +10,34 @@ class HappyRobotController < ApplicationController
 
   end
 
-  def isPostLink? href
+
+  def run
+
+    Crawler_sjtu.run
+    
+    redirect_to posts_path
+  end
+ 
+
+end 
+
+class Crawler_sjtu
+
+  def self.is_post_link? href
     href.include?"reid"
   end
 
-  def isAlbumIntr? title
+  def self.is_album_intr? title
     #contains [\347\256\200\344\273\213] - UTF-8
     title.include?"[简介]"
   end
 
   #the artist is right after [jian jie]
-  def isInterestedAuthor? title
+  def self.is_interested_author? title
     true
   end
 
-
-  def run
-  
-    #
-  
-  
+  def self.run
     #this is the index page
     #@uri = "http://bbs.sjtu.edu.cn/bbstdoc,board,PopMusic.html"
     @sjtu_bbs_root_uri = "http://bbs.sjtu.edu.cn/"
@@ -37,7 +45,7 @@ class HappyRobotController < ApplicationController
     #Alougth the site declared to be GB2312 ,but same character are actually not, which
     #will result in truncated document. Declaring it as GB18030 will solve this problem
     #the doc returned is alreayd UTF-8 coding. Cool!
-  
+
     #get ten pages - we want to visit
     count = 0
 
@@ -46,12 +54,16 @@ class HappyRobotController < ApplicationController
     begin
 
       puts "grab #{page_uri}"
-      doc = Nokogiri::HTML(open(page_uri,'User-Agent' => 'ruby'), nil, "GB18030")
+
+      #proxy should not be used in when in home , you could either unset http_proxy
+      #or set :proxy => nil
+      #doc = Nokogiri::HTML(open(page_uri,:proxy => nil, 'User-Agent' => 'ruby'), nil, "GB18030")
+      doc = Nokogiri::HTML(open(page_uri,:proxy => nil,'User-Agent' => 'ruby'), nil, "GB18030")
 
       interested_posts_in_current_page = doc.xpath('//a').select do |node|
-        isPostLink? node['href'] and
-          isAlbumIntr? node.text and
-          isInterestedAuthor? node.text
+        is_post_link? node['href'] and
+          is_album_intr? node.text and
+          is_interested_author? node.text
       end
 
       interested_posts_in_current_page.each do |node|
@@ -71,9 +83,8 @@ class HappyRobotController < ApplicationController
       count += 1
     end until (count == 10)
 
-    redirect_to posts_path
   end  #run
 
 
-end 
-
+  
+end
