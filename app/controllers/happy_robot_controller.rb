@@ -23,6 +23,8 @@ class HappyRobotController < ApplicationController
 
 end
 
+Event = Struct.new :title, :link ,:date
+
 class Douban
 
   def self.yuyingtang_event_uri
@@ -41,6 +43,14 @@ class Douban
    def self.is_event_link? href
     href.include?"event"
   end
+
+   #return Time object
+   #date format is
+   #"时间：2010年8月13日 周五 21:30 -  23:55"
+   def self.parse_date date
+      year, month , day = date.scan(/\d{1,4}/)
+      Time.local(year,month,day)
+   end
 end
 
 
@@ -48,15 +58,42 @@ end
     def self.run
      page_uri = Douban.maosh_event_uri
      doc = Douban.get(page_uri)
-     interested_posts_in_current_page = doc.xpath('//h2/a').select do |node|
-        Douban.is_event_link? node['href']
-     end
-     interested_posts_in_current_page.each do |node|
-        link =  node['href']
-        title = "[MAO上海]"+node.text
-        puts title + " link: " + link
-        Post.new(:name => "happy_robot",:title => title,:content => link).save
-    end
+
+     events = doc.css("div.nof.clearfix").map do |eventnode|
+         name = eventnode.at_css("h2 a").text.strip
+         link = eventnode.at_css("h2 a")['href']
+        #intro includes : date &  place
+        #"时间：2010年8月13日 周五 21:30 -  23:55\n      
+        # 地点：上海 长宁区 淮海西路570号32幢 MAO livehouse上海店\n        
+        # 发起人：MAO LIVEHOUSE 上海店  \n             \n        
+        # 224人参加   799人感兴趣"
+         intro = eventnode.at_css("div.pl.intro").text.strip
+         date = intro.split("\n").first.strip
+         
+        
+         Event.new name , link , date
+      end
+
+     #today = Time.now.year
+     #save only events that are 
+     #1. has not happened and
+     #2. has not been posted/crawled
+      events.select { |event|
+        Douban.parse_date(event.date) > Time.now and
+        Post.find_all_by_name_and_title("happy_robot",event.title).empty?
+      }.each {|e| Post.new(:name => "happy_robot",:title => e.title,:content => e.link).save}
+   
+      
+#     #save only event whose start time > now
+#     interested_posts_in_current_page = doc.xpath('//h2/a').select do |node|
+#        Douban.is_event_link? node['href']
+#     end
+#     interested_posts_in_current_page.each do |node|
+#        link =  node['href']
+#        title = "[MAO上海]"+node.text
+#        puts title + " link: " + link
+#        Post.new(:name => "happy_robot",:title => title,:content => link).save
+#    end
   end
  end
 
