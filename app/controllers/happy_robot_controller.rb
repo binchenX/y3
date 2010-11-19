@@ -14,7 +14,8 @@ class HappyRobotController < ApplicationController
   def run
 
     #Crawler_sjtu.run
-    Crawler_yuyingtang.run
+    #Crawler_yuyingtang.run
+    Crawler_maosh.run
    
     redirect_to posts_path
   end
@@ -22,27 +23,54 @@ class HappyRobotController < ApplicationController
 
 end
 
-class Crawler_yuyingtang
+class Douban
 
-  def self.is_event_link? href
-    href.include?"event/"
+  def self.yuyingtang_event_uri
+    "http://www.douban.com/host/yuyintang/events"
   end
-  
-  def self.run
-     page_uri = "http://www.douban.com/host/yuyintang/events"
 
-     doc = Nokogiri::HTML(open(page_uri,:proxy => nil,'User-Agent' => 'ruby'),nil, "utf-8")
+  def self.maosh_event_uri
+    "http://www.douban.com/host/maosh/events"
+  end
 
-     puts doc
+  #return a Nokogiri HTML object
+  def self.get url
+    Nokogiri::HTML(open(url,:proxy => nil,'User-Agent' => 'ruby'),nil, "utf-8")
+  end
+
+   def self.is_event_link? href
+    href.include?"event"
+  end
+end
+
+
+ class Crawler_maosh
+    def self.run
+     page_uri = Douban.maosh_event_uri
+     doc = Douban.get(page_uri)
      interested_posts_in_current_page = doc.xpath('//h2/a').select do |node|
-        is_event_link? node['href'] 
+        Douban.is_event_link? node['href']
      end
+     interested_posts_in_current_page.each do |node|
+        link =  node['href']
+        title = "[MAO上海]"+node.text
+        puts title + " link: " + link
+        Post.new(:name => "happy_robot",:title => title,:content => link).save
+    end
+  end
+ end
 
-    interested_posts_in_current_page.each do |node|
+class Crawler_yuyingtang
+  def self.run
+     page_uri = Douban.yuyingtang_event_uri    
+     doc = Douban.get(page_uri)
+     interested_posts_in_current_page = doc.xpath('//h2/a').select do |node|
+        Douban.is_event_link? node['href']
+     end
+     interested_posts_in_current_page.each do |node|
         link =  node['href']
         title = "[育音堂]"+node.text
         puts title + " link: " + link
-        #Let's save this post to our Model
         Post.new(:name => "happy_robot",:title => title,:content => link).save        
     end
   end
