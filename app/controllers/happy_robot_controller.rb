@@ -14,9 +14,8 @@ class HappyRobotController < ApplicationController
   def run
 
     #Crawler_sjtu.run
-    #Crawler_yuyingtang.run
+    Crawler_yuyingtang.run
     Crawler_maosh.run
-   
     redirect_to posts_path
   end
  
@@ -40,76 +39,63 @@ class Douban
     Nokogiri::HTML(open(url,:proxy => nil,'User-Agent' => 'ruby'),nil, "utf-8")
   end
 
-   def self.is_event_link? href
+  def self.is_event_link? href
     href.include?"event"
   end
 
-   #return Time object
-   #date format is
-   #"时间：2010年8月13日 周五 21:30 -  23:55"
-   def self.parse_date date
-      year, month , day = date.scan(/\d{1,4}/)
-      Time.local(year,month,day)
-   end
+  #return Time object
+  #date format is
+  #"时间：2010年8月13日 周五 21:30 -  23:55"
+  def self.parse_date date
+    year, month , day = date.scan(/\d{1,4}/)
+    Time.local(year,month,day)
+  end
 end
 
 
- class Crawler_maosh
-    def self.run
-     page_uri = Douban.maosh_event_uri
-     doc = Douban.get(page_uri)
+#As we will crawl every day, it is enough to just crawl the first page 
 
-     events = doc.css("div.nof.clearfix").map do |eventnode|
-         name = eventnode.at_css("h2 a").text.strip
-         link = eventnode.at_css("h2 a")['href']
-        #intro includes : date &  place
-        #"时间：2010年8月13日 周五 21:30 -  23:55\n      
-        # 地点：上海 长宁区 淮海西路570号32幢 MAO livehouse上海店\n        
-        # 发起人：MAO LIVEHOUSE 上海店  \n             \n        
-        # 224人参加   799人感兴趣"
-         intro = eventnode.at_css("div.pl.intro").text.strip
-         date = intro.split("\n").first.strip
-         
-        
-         Event.new name , link , date
-      end
 
-     #today = Time.now.year
-     #save only events that are 
-     #1. has not happened and
-     #2. has not been posted/crawled
-      events.select { |event|
-        Douban.parse_date(event.date) > Time.now and
+class Cralwer_douban_events
+
+  def self.crawl page_uri
+
+    doc = Douban.get(page_uri)
+
+    events = doc.css("div.nof.clearfix").map do |eventnode|
+      name = eventnode.at_css("h2 a").text.strip
+      link = eventnode.at_css("h2 a")['href']
+      #intro includes : date &  place
+      #"时间：2010年8月13日 周五 21:30 -  23:55\n
+      # 地点：上海 长宁区 淮海西路570号32幢 MAO livehouse上海店\n
+      # 发起人：MAO LIVEHOUSE 上海店  \n             \n
+      # 224人参加   799人感兴趣"
+      intro = eventnode.at_css("div.pl.intro").text.strip
+      date = intro.split("\n").first.strip
+      Event.new name , link , date
+    end
+
+    today = Time.now
+    #save only events that are
+    #1. has not happened and
+    #2. has not been posted/crawled
+    events.select { |event|
+      Douban.parse_date(event.date) > today and
         Post.find_all_by_name_and_title("happy_robot",event.title).empty?
-      }.each {|e| Post.new(:name => "happy_robot",:title => e.title,:content => e.link).save}
-   
-      
-#     #save only event whose start time > now
-#     interested_posts_in_current_page = doc.xpath('//h2/a').select do |node|
-#        Douban.is_event_link? node['href']
-#     end
-#     interested_posts_in_current_page.each do |node|
-#        link =  node['href']
-#        title = "[MAO上海]"+node.text
-#        puts title + " link: " + link
-#        Post.new(:name => "happy_robot",:title => title,:content => link).save
-#    end
+    }.each {|e| Post.new(:name => "happy_robot",:title => e.title,:content => e.link).save}
+
   end
- end
+end
+ 
+class Crawler_maosh
+  def self.run
+    Cralwer_douban_events.crawl Douban.maosh_event_uri
+  end
+end
 
 class Crawler_yuyingtang
   def self.run
-     page_uri = Douban.yuyingtang_event_uri    
-     doc = Douban.get(page_uri)
-     interested_posts_in_current_page = doc.xpath('//h2/a').select do |node|
-        Douban.is_event_link? node['href']
-     end
-     interested_posts_in_current_page.each do |node|
-        link =  node['href']
-        title = "[育音堂]"+node.text
-        puts title + " link: " + link
-        Post.new(:name => "happy_robot",:title => title,:content => link).save        
-    end
+    Cralwer_douban_events.crawl Douban.yuyingtang_event_uri
   end
 end
 
