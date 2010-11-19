@@ -14,8 +14,9 @@ class HappyRobotController < ApplicationController
   def run
 
     #Crawler_sjtu.run
-    Crawler_yuyingtang.run
-    Crawler_maosh.run
+    
+    Douban.hosts.each {|host| Cralwer_douban_events.crawl(host) }
+    
     redirect_to posts_path
   end
  
@@ -26,12 +27,14 @@ Event = Struct.new :title, :link ,:date
 
 class Douban
 
-  def self.yuyingtang_event_uri
-    "http://www.douban.com/host/yuyintang/events"
-  end
-
-  def self.maosh_event_uri
-    "http://www.douban.com/host/maosh/events"
+  def self.hosts
+    [
+      "http://www.douban.com/host/yuyintang/events",
+      "http://www.douban.com/host/maosh/events",
+      "http://www.douban.com/host/lostmusic/events",
+      "http://www.douban.com/host/zjdreams/events",
+      "http://www.douban.com/host/livebar696/events"
+    ]
   end
 
   #return a Nokogiri HTML object
@@ -87,17 +90,17 @@ class Cralwer_douban_events
   end
 end
  
-class Crawler_maosh
-  def self.run
-    Cralwer_douban_events.crawl Douban.maosh_event_uri
-  end
-end
-
-class Crawler_yuyingtang
-  def self.run
-    Cralwer_douban_events.crawl Douban.yuyingtang_event_uri
-  end
-end
+#class Crawler_maosh
+#  def self.run
+#    Cralwer_douban_events.crawl Douban.maosh_event_uri
+#  end
+#end
+#
+#class Crawler_yuyingtang
+#  def self.run
+#    Cralwer_douban_events.crawl Douban.yuyingtang_event_uri
+#  end
+#end
 
 class Crawler_sjtu
 
