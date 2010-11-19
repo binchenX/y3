@@ -1,13 +1,16 @@
 body {
-    background-color: white;
+    background-color: gray;
     color: #333;
     
     padding: 0;
     border: 0;
     height: 100%;
     max-height: 100%;
+    font-family: Pmingliu,verdana,arial,sans-serif;font-size:12px;
+  /*
     font-family: Verdana, Arial, Helvetica, "Trebuchet MS", Tahoma, Geneva, "Lucida Sans Unicode", "Lucida Grande", "MS Sans Serif", sans-serif;
-    font-size: medium;
+    */
+
     line-height: 18px;
 }
 
@@ -45,9 +48,10 @@ pre {
 .post-summary{
     font-size: 120%;
     width: 96%;
-    margin:  2%;
-    font-family: Courier,"Courier New" ,monospace;
-    
+    margin-left: 2%;
+    margin-right: 2%;
+    margin-bottom: 4%;
+    margin-top: 4%;
 }
 
 .post-text{
