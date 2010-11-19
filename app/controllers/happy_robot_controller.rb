@@ -34,13 +34,13 @@ class Crawler_yuyingtang
      doc = Nokogiri::HTML(open(page_uri,:proxy => nil,'User-Agent' => 'ruby'),nil, "utf-8")
 
      puts doc
-     interested_posts_in_current_page = doc.xpath('//a').select do |node|
+     interested_posts_in_current_page = doc.xpath('//h2/a').select do |node|
         is_event_link? node['href'] 
      end
 
     interested_posts_in_current_page.each do |node|
         link =  node['href']
-        title = node.text
+        title = "[育音堂]"+node.text
         puts title + " link: " + link
         #Let's save this post to our Model
         Post.new(:name => "happy_robot",:title => title,:content => link).save        
