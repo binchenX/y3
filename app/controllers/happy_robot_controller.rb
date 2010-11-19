@@ -13,13 +13,40 @@ class HappyRobotController < ApplicationController
 
   def run
 
-    Crawler_sjtu.run
-    
+    #Crawler_sjtu.run
+    Crawler_yuyingtang.run
+   
     redirect_to posts_path
   end
  
 
-end 
+end
+
+class Crawler_yuyingtang
+
+  def self.is_event_link? href
+    href.include?"event/"
+  end
+  
+  def self.run
+     page_uri = "http://www.douban.com/host/yuyintang/events"
+
+     doc = Nokogiri::HTML(open(page_uri,:proxy => nil,'User-Agent' => 'ruby'),nil, "utf-8")
+
+     puts doc
+     interested_posts_in_current_page = doc.xpath('//a').select do |node|
+        is_event_link? node['href'] 
+     end
+
+    interested_posts_in_current_page.each do |node|
+        link =  node['href']
+        title = node.text
+        puts title + " link: " + link
+        #Let's save this post to our Model
+        Post.new(:name => "happy_robot",:title => title,:content => link).save        
+    end
+  end
+end
 
 class Crawler_sjtu
 
