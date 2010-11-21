@@ -3,6 +3,8 @@
 - posts.each do |post|
     %div.post-summary
         %p= link_to post.title , post
+    %div.post-text
+        %p= raw(post.html_content)
 -# don't show tags in summary
 -#    %div.tags
 -#        - post.tags.each do |tag|
