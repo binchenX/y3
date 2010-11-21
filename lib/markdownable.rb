@@ -6,6 +6,14 @@ module Markdownable
   end
 
   def generate_html_content
-    self.html_content = RDiscount.new(content).to_html
+    #for post crawled by happy robot , no need to convert to html.
+    #when the post is posted by the user, the html_content is nil ,so convert the conent, which is
+    #a markdown to the html format
+    #when the post is posted by the happy_robot, the html_conent , grabed directly from the website,
+    #is not nil.
+    
+    if self.html_content.nil? #post by the User
+      self.html_content = RDiscount.new(content).to_html
+    end
   end
 end

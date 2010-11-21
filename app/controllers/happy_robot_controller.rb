@@ -13,7 +13,7 @@ class HappyRobotController < ApplicationController
 
   def run
 
-    Crawler_sjtu.run    
+    #Crawler_sjtu.run
     Douban.hosts.each {|host| Cralwer_douban_events.crawl(host) }
     
     redirect_to posts_path
@@ -85,8 +85,14 @@ class Cralwer_douban_events
     #2. has not been posted/crawled
     events.select { |event|
       Douban.parse_date(event.date) > today and
-        Post.find_all_by_name_and_title("happy_robot",event.title).empty?
-    }.each {|e| Post.new(:name => "happy_robot",:title => e.title,:content => e.link,:tag_list => "show, 演出").save}
+      Post.find_all_by_name_and_title("happy_robot",event.title).empty?
+    }.each {|e|
+      #grab the content pointed by e.link
+      detail_page = Douban.get(e.link)
+      html_content = detail_page.css("div.wr").to_s
+      Post.new(:name => "happy_robot",:title => e.title,:html_content => html_content,:tag_list => "show, 演出").save
+      
+      }
 
   end
 end
