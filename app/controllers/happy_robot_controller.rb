@@ -13,8 +13,7 @@ class HappyRobotController < ApplicationController
 
   def run
 
-    #Crawler_sjtu.run
-    
+    Crawler_sjtu.run    
     Douban.hosts.each {|host| Cralwer_douban_events.crawl(host) }
     
     redirect_to posts_path
@@ -24,6 +23,8 @@ class HappyRobotController < ApplicationController
 end
 
 Event = Struct.new :title, :link ,:date
+
+Album = Struct.new :title, :link
 
 class Douban
 
@@ -85,22 +86,10 @@ class Cralwer_douban_events
     events.select { |event|
       Douban.parse_date(event.date) > today and
         Post.find_all_by_name_and_title("happy_robot",event.title).empty?
-    }.each {|e| Post.new(:name => "happy_robot",:title => e.title,:content => e.link).save}
+    }.each {|e| Post.new(:name => "happy_robot",:title => e.title,:content => e.link,:tag_list => "show, 演出").save}
 
   end
 end
- 
-#class Crawler_maosh
-#  def self.run
-#    Cralwer_douban_events.crawl Douban.maosh_event_uri
-#  end
-#end
-#
-#class Crawler_yuyingtang
-#  def self.run
-#    Cralwer_douban_events.crawl Douban.yuyingtang_event_uri
-#  end
-#end
 
 class Crawler_sjtu
 
@@ -127,12 +116,10 @@ class Crawler_sjtu
     #will result in truncated document. Declaring it as GB18030 will solve this problem
     #the doc returned is alreayd UTF-8 coding. Cool!
 
-    #get ten pages - we want to visit
-    count = 0
-
     page_uri = @sjtu_bbs_rock_index
 
-    begin
+    #5 page should be enough if we crawl every day
+    5.times {
 
       puts "grab #{page_uri}"
 
@@ -147,22 +134,23 @@ class Crawler_sjtu
           is_interested_author? node.text
       end
 
-      interested_posts_in_current_page.each do |node|
+      #if we have not saved it , save it
+      interested_posts_in_current_page.each.select {|node|
+          Post.find_all_by_name_and_title("happy_robot", node.text).empty?
+      }.each do |node|
         link = @sjtu_bbs_root_uri + node['href']
         title = node.text
-
         puts title + " link: " + link
-
         #Let's save this post to our Model
-        Post.new(:name => "happy_robot",:title => title,:content => link).save
+        Post.new(:name => "happy_robot",:title => title,:content => link, :tag_list => "album,专辑").save
       end
 
       previous_page_url =  @sjtu_bbs_root_uri + doc.xpath('//a').select {|node| node.text.include?"上一页"}.first["href"]
 
       #set up previous page uri for next iteration
       page_uri = previous_page_url
-      count += 1
-    end until (count == 10)
+      
+    }
 
   end  #run
 
