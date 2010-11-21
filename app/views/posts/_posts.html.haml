@@ -3,7 +3,8 @@
 - posts.each do |post|
     %div.post-summary
         %p= link_to post.title , post
-    %div.tags
-        - post.tags.each do |tag|
-            %div.post-tag= link_to tag.name, tag_path(tag.name)
+-# don't show tags in summary
+-#    %div.tags
+-#        - post.tags.each do |tag|
+-#            %div.post-tag= link_to tag.name, tag_path(tag.name)
 
