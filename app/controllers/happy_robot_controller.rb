@@ -13,9 +13,8 @@ class HappyRobotController < ApplicationController
 
   def run
 
-    #Crawler_sjtu.run
+    Crawler_sjtu.run
     Douban.hosts.each {|host| Cralwer_douban_events.crawl(host) }
-    
     redirect_to posts_path
   end
  
@@ -90,6 +89,7 @@ class Cralwer_douban_events
       #grab the content pointed by e.link
       detail_page = Douban.get(e.link)
       html_content = detail_page.css("div.wr#edesc_s").to_s
+      html_content << "来源" + e.link
       Post.new(:name => "happy_robot",:title => e.title,:html_content => html_content,:tag_list => "show, 演出").save
       
       }
@@ -99,6 +99,12 @@ end
 
 class Crawler_sjtu
 
+  def self.get uri
+     #proxy should not be used in when in home , you could either unset http_proxy
+     #or set :proxy => nil
+     #doc = Nokogiri::HTML(open(page_uri,:proxy => nil, 'User-Agent' => 'ruby'), nil, "GB18030")
+    Nokogiri::HTML(open(uri,:proxy => nil,'User-Agent' => 'ruby'), nil, "GB18030")
+  end
   def self.is_post_link? href
     href.include?"reid"
   end
@@ -129,10 +135,8 @@ class Crawler_sjtu
 
       puts "grab #{page_uri}"
 
-      #proxy should not be used in when in home , you could either unset http_proxy
-      #or set :proxy => nil
-      #doc = Nokogiri::HTML(open(page_uri,:proxy => nil, 'User-Agent' => 'ruby'), nil, "GB18030")
-      doc = Nokogiri::HTML(open(page_uri,:proxy => nil,'User-Agent' => 'ruby'), nil, "GB18030")
+     
+      doc = get page_uri
 
       interested_posts_in_current_page = doc.xpath('//a').select do |node|
         is_post_link? node['href'] and
@@ -147,8 +151,26 @@ class Crawler_sjtu
         link = @sjtu_bbs_root_uri + node['href']
         title = node.text
         puts title + " link: " + link
+        #go and grab the post
+
+        post = get(link)
+        #1. why .first?
+        #    the first <pre> element is the original post , others are replies
+        #2. why  [2..-3]  
+        #   remove the first two lines, and last 2 lines ,
+        #
+        # <pre>
+        #[<a href="bbspst?board=PopMusic&amp;file=M.1287289219.A">回复本文</a>] 发信人: <a href="bbsqry?userid=InnJayHee">InnJayHee</a>(loser), 信区: PopMusic
+        #正文  <-- this is what we interested
+        #<font class="c37"></font><font class="c34">※ 来源:·饮水思源 bbs.sjtu.edu.cn·[FROM: 222.134.174.29]</font><font class="c37">
+        #</font></pre>
+        #
+        html_content = '<pre>' <<
+                    post.css('pre').first.to_s.split("\n")[2..-3].join("\n") <<
+                    '</pre>' <<
+                    "来源" + link
         #Let's save this post to our Model
-        Post.new(:name => "happy_robot",:title => title,:content => link, :tag_list => "album,专辑").save
+        Post.new(:name => "happy_robot",:title => title,:html_content => html_content, :tag_list => "album,专辑").save
       end
 
       previous_page_url =  @sjtu_bbs_root_uri + doc.xpath('//a').select {|node| node.text.include?"上一页"}.first["href"]
