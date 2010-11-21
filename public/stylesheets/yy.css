@@ -26,6 +26,12 @@ pre {
   font-size: 11px;
 }
 
+img {
+  max-height: 320px;
+  max-width: 480px;
+  overflow: hidden;
+}
+
 
 .post-page{
 	/*
