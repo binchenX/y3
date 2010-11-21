@@ -89,7 +89,7 @@ class Cralwer_douban_events
     }.each {|e|
       #grab the content pointed by e.link
       detail_page = Douban.get(e.link)
-      html_content = detail_page.css("div.wr").to_s
+      html_content = detail_page.css("div.wr#edesc_s").to_s
       Post.new(:name => "happy_robot",:title => e.title,:html_content => html_content,:tag_list => "show, 演出").save
       
       }
