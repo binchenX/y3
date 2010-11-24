@@ -19,7 +19,7 @@ class Post < ActiveRecord::Base
 
 
   def self.per_page
-    30
+    10
   end
 
 #  def vote(post)

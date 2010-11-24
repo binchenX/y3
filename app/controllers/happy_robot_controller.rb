@@ -33,7 +33,8 @@ class Douban
       "http://www.douban.com/host/maosh/events",
       "http://www.douban.com/host/lostmusic/events",
       "http://www.douban.com/host/zjdreams/events",
-      "http://www.douban.com/host/livebar696/events"
+      "http://www.douban.com/host/livebar696/events",
+      "http://www.douban.com/host/maolivehouse/events"
     ]
   end
 
