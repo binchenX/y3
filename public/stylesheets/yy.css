@@ -15,6 +15,11 @@ body {
     line-height: 18px;
 }
 
+/*for hr*/
+#rule_header{
+    margin-bottom: 60px;
+    
+}
 h1 {font-size: 250%}
 
 body, p, ol, ul, td {
@@ -42,8 +47,8 @@ img {
     position: absolute;
     /*
     top: 70px;*/
-    left: 150px;
-    width: 480px;
+    left: 50px;
+    width: 80%;
     /*
 	border-left: solid 1px black;
     border-right: solid 1px black;
@@ -67,16 +72,34 @@ img {
 }
 
 .post-header{
-    
+
+   /*use the box model as  indication*/
+
+    border-left:2px solid gray;
+    border-right:2px solid gray;
+    border-top:2px solid gray;
+    /*border-bottom:2px solid gray;*/
     font-weight: bolder;
-    border: 2px solid blue;
-    height: 30px;
+    margin-top: 0px;
+    padding-top: 0px;
+    width: 70%;
+    height: 28px; /* carefully selected */
+}
+
+.post-header a{
+    display: block;
+    text-decoration: none ;
 }
 
 .post-text{
-    border: 2px solid red;
+    /*use the box model as  indication*/
+    border-left:2px solid gray;
+    border-right:2px solid gray;
+    border-bottom:2px solid gray;
+    border-top:2px solid gray;
     background-image: url(/images/post_bg.png);
     background-color: #EEF3E2;
+    margin-bottom: 40px;
    /*width: 96%;*/
    /* padding: 10px;*/
 
@@ -112,7 +135,10 @@ img {
 
 a { color: #000; }
 a:visited { color: #666; }
-a:hover { color: #fff; background-color:#000; }
+a:hover {
+    color: #fff;
+    background-color: orange;
+}
 
 div.field, div.actions {
     margin-bottom: 10px;
@@ -163,6 +189,9 @@ span.intive_to_register{
     /*border: solid 1px black;*/
     /*background: red;*/
     height: 25px;
+    /*background-color: black;*/
+    color: red;
+    font-size: 12px;
     /*float :right;*/
 }
 
@@ -172,15 +201,14 @@ span.intive_to_register{
     margin-right: auto;
     margin-left: auto;
     padding: 0px;
-    background: #EEE;
     height:60px;
     text-align: center;
 }
 
 #user_nav{
 
+   /* background-color: black;*/
     float: right;
-    font-size: 12px;
     /*
     left:150px;
     position: fixed;*/
@@ -190,12 +218,14 @@ span.intive_to_register{
 #site_nav{
 
     float: right;
-    font-size: 12px;
-    /*
-    left:250px;
-    position: fixed;*/
+    left:600px;
+    top: 50px;
+    position: fixed;
 }
 
+#rails_icon{
+    max-height: 10px;
+}
 
 .vote-info{
 

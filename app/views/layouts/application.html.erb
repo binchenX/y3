@@ -19,12 +19,13 @@
           <%  end %>
         </div>
 
-        <div id="site_nav">
-          <%= link_to 'All Post', posts_path %> |
-          <%= link_to 'New Post', new_post_path %> |
+        <div id="site_nav">         
+          <!--%= link_to 'New Post', posts_path  %--> 
+          <%= link_to image_tag("new_post.gif", :border=>0),new_post_path %> 
         </div>
       </div>
 
+      <hr id="rule_header"/>
 
       <%- flash.each do |name,msg| -%>
         <%= content_tag :div ,msg, :id => "flash_#{name}" %>
@@ -34,7 +35,8 @@
     </div>
 
     <div id="footer">
-      powered by Ruby on Rails
+      powered by
+      <%= link_to image_tag("rails.png", :border=>0),"http://rubyonrails.org/",:id=>"rails_icon" %>
     </div>
 
   </body>
