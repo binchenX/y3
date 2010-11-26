@@ -1,7 +1,7 @@
 
 
 - posts.each do |post|
-    %div.post-summary
+    %div.post-header
         %p= link_to post.title , post
     %div.post-text
         %p= raw(post.html_content)

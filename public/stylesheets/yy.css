@@ -1,6 +1,7 @@
 body {
-    background-color: 0xccffcc;
-    color: #333;
+    background-color: #A9F5F2;
+    color: #000000;
+    background-image: url(/images/bg_light_blue.png);
 
     padding: 0;
     border: 0;
@@ -35,7 +36,7 @@ img {
 
 .post-page{
     
-	background-image: url(/images/bg_xiaoxi.jpg);
+	
 	/*background-repeat: repeat ;*/
 	
     position: absolute;
@@ -53,18 +54,31 @@ img {
 }
 
 .post-summary{
+    background-image: url(/images/post_bg.png);
     font-size: 120%;
+    font-style: italic;
     width: 96%;
+    /*
     margin-left: 2%;
     margin-right: 2%;
     margin-bottom: 4%;
     margin-top: 4%;
+    */
+}
+
+.post-header{
+    
+    font-weight: bolder;
+    border: 2px solid blue;
+    height: 30px;
 }
 
 .post-text{
-    background-color: #ececec;
-    width: 450px;
-    padding: 10px;
+    border: 2px solid red;
+    background-image: url(/images/post_bg.png);
+    background-color: #EEF3E2;
+   /*width: 96%;*/
+   /* padding: 10px;*/
 
 }
 
