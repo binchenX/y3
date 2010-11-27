@@ -82,10 +82,13 @@ img {
     font-weight: bolder;
     margin-top: 0px;
     padding-top: 0px;
-    width: 70%;
+    /*width: 60%;*/
     height: 28px; /* carefully selected */
 }
 
+#main{
+    width: 70%;
+}
 .post-header a{
     display: block;
     text-decoration: none ;
@@ -195,6 +198,13 @@ span.intive_to_register{
     /*float :right;*/
 }
 
+#side_bar{
+
+    background-color: red;
+    width: 20%;
+    float: right;
+    height: 80%;
+}
 #footer{
     clear:both;
     /*width:776px;*/

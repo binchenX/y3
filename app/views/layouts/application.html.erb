@@ -27,15 +27,43 @@
 
       <hr id="rule_header"/>
 
+
+    <div id="side_bar">
+       <br />A very nice side bar.
+       <br />A very nice side bar.
+       <br />A very nice side bar.
+       <br />A very nice side bar.
+       <br />A very nice side bar.
+       <br />A very nice side bar.
+       <br />A very nice side bar.
+       <br />A very nice side bar.
+       <br />A very nice side bar.
+       <br />A very nice side bar.
+
+        <br />A very nice side bar.
+       <br />A very nice side bar.
+       <br />A very nice side bar.
+       <br />A very nice side bar.
+       <br />A very nice side bar.
+       <br />A very nice side bar.
+       <br />A very nice side bar.
+       <br />A very nice side bar.
+       <br />A very nice side bar.
+       <br />A very nice side bar.
+    
+    </div>
+
+      <div id="main">
       <%- flash.each do |name,msg| -%>
         <%= content_tag :div ,msg, :id => "flash_#{name}" %>
       <%- end -%>
 
       <%= yield %>
+        </div>
     </div>
 
     <div id="footer">
-      powered by
+      powered by <br />
       <%= link_to image_tag("rails.png", :border=>0),"http://rubyonrails.org/",:id=>"rails_icon" %>
     </div>
 
