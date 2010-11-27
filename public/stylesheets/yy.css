@@ -225,27 +225,56 @@ span.intive_to_register{
 
 }
 
-#site_nav{
+#site-nav{
+    position: absolute;
+    top:  60px;
+    left: 300px;
+    width: 500px;
 
-    float: right;
-    left:700px;
-    top: 100px;
-    position: fixed;
+   /*debug only
+    border: 1px solid #666;*/
+}
+
+.mainnav{
+    position: absolute;
+    top:  0px;
+    left: 0px;
+}
+
+.new-post{
+    position: absolute;
+    top:  0px;
+    left: 275px;
+}
+
+
+.nav{
     list-style-type: none;
 }
 
-#site_nav li{
+.nav li{
     display: inline;
 }
-#site_nav ul li a {
+
+.nav ul li a {
     padding: 5px 20px;
     margin: 0px 2px;
     border: 1px solid #666;
     background-color: #ccc;
     text-decoration: none;
-    text-align: center;
-    
+    text-align: center;    
 }
+
+.nav ul li a:hover {
+  background-color: orange;
+  color: #FFF;
+
+}
+
+
+
+
+
 #rails_icon{
     max-height: 10px;
 }
