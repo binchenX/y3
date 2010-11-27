@@ -228,11 +228,24 @@ span.intive_to_register{
 #site_nav{
 
     float: right;
-    left:600px;
-    top: 50px;
+    left:700px;
+    top: 100px;
     position: fixed;
+    list-style-type: none;
 }
 
+#site_nav li{
+    display: inline;
+}
+#site_nav ul li a {
+    padding: 5px 20px;
+    margin: 0px 2px;
+    border: 1px solid #666;
+    background-color: #ccc;
+    text-decoration: none;
+    text-align: center;
+    
+}
 #rails_icon{
     max-height: 10px;
 }
