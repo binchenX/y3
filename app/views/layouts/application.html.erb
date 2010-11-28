@@ -22,15 +22,15 @@
         <div id="site-nav">
           <div class="nav mainnav">
             <ul>
-              <li> <%=link_to "演出", tag_path("show" , id=>"site-nav-show") %></li>
-              <li> <%=link_to "专辑", tag_path("album"), id=>"site-nav-album" %></li>
-              <li> <%=link_to "图片", tag_path("picture"), id=>"site-nav-pic" %></li>
+              <li> <%=link_to "演出", tag_path("show" , object_id=>"site-nav-show") %></li>
+              <li> <%=link_to "专辑", tag_path("album"), object_id=>"site-nav-album" %></li>
+              <li> <%=link_to "图片", tag_path("picture"),object_id=>"site-nav-pic" %></li>
             </ul>
           </div>
           <div class="nav new-post">
             <!--%= link_to image_tag("new_post.gif", :border=>0),new_post_path %-->
             <ul>
-              <li> <%= link_to 'New Post', new_post_path  %></li>
+              <li> <%= link_to 'New Post', new_post_path ,object_id=>"new_post"  %></li>
             </ul>
 
           </div>
@@ -41,27 +41,8 @@
 
 
       <div id="side_bar">
-        <br />A very nice side bar.
-        <br />A very nice side bar.
-        <br />A very nice side bar.
-        <br />A very nice side bar.
-        <br />A very nice side bar.
-        <br />A very nice side bar.
-        <br />A very nice side bar.
-        <br />A very nice side bar.
-        <br />A very nice side bar.
-        <br />A very nice side bar.
-
-        <br />A very nice side bar.
-        <br />A very nice side bar.
-        <br />A very nice side bar.
-        <br />A very nice side bar.
-        <br />A very nice side bar.
-        <br />A very nice side bar.
-        <br />A very nice side bar.
-        <br />A very nice side bar.
-        <br />A very nice side bar.
-        <br />A very nice side bar.
+        <br /> 英俊的sidebar
+        
 
       </div>
 

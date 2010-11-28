@@ -191,7 +191,8 @@ span.intive_to_register{
     /*margin-bottom:  10%;*/
     /*border: solid 1px black;*/
     /*background: red;*/
-    height: 25px;
+    background: url(/images/header_xiaoxi.jpg) no-repeat;
+    height: 200px;
     /*background-color: black;*/
     color: red;
     font-size: 12px;
@@ -200,10 +201,11 @@ span.intive_to_register{
 
 #side_bar{
 
-    background-color: red;
+    
     width: 20%;
     float: right;
-    height: 80%;
+    height: 200px;
+    border: 1px solid #666;
 }
 #footer{
     clear:both;
@@ -227,7 +229,7 @@ span.intive_to_register{
 
 #site-nav{
     position: absolute;
-    top:  60px;
+    top:  200px;
     left: 300px;
     width: 500px;
 
@@ -245,6 +247,16 @@ span.intive_to_register{
     position: absolute;
     top:  0px;
     left: 275px;
+}
+
+
+#new_post{
+    height: 20px;
+    background: url(/images/new_post.gif) no-repeat;
+    text-indent: -5000px;
+    display: block;
+    background-color: transparent;
+    border: none;
 }
 
 
