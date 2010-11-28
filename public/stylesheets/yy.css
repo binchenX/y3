@@ -251,12 +251,13 @@ span.intive_to_register{
 
 
 #new_post{
+    /*
     height: 20px;
     background: url(/images/new_post.gif) no-repeat;
     text-indent: -5000px;
     display: block;
     background-color: transparent;
-    border: none;
+    border: none;*/
 }
 
 
