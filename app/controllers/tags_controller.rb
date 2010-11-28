@@ -3,7 +3,7 @@ class TagsController < ApplicationController
   def show
 
     puts params.inspect
-    @tagged_posts = Post.tagged_with(params[:id])
+    @tagged_posts = Post.tagged_with(params[:id]).sort_by {|post| post.created_at}
   end
 
 end
