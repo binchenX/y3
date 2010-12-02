@@ -11,8 +11,17 @@ class ApplicationController < ActionController::Base
     return false
   end
 
+  def current_user_is_admin
+      return current_user && current_user.login.eql?("pierr")
+  end
 
   helper_method :current_user
+  helper_method :current_user_is_admin
+
+  def current_user_is_admin
+      return current_user && current_user.login.eql?("pierr")
+  end
+  
    def current_user_session
       return @current_user_session if defined?(@current_user_session)
       @current_user_session = UserSession.find
