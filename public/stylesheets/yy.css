@@ -15,6 +15,19 @@ body {
     line-height: 18px;
 }
 
+#post_title{
+   width: 100%
+
+}
+#post_content{
+   
+   width: 100%
+    
+}
+
+#comment_body{
+    width: 100%;
+}
 /*for hr*/
 #rule_header{
     margin-bottom: 60px;
