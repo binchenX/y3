@@ -217,8 +217,9 @@ span.intive_to_register{
     
     width: 20%;
     float: right;
-    height: 200px;
+    height: 300px;
     border: 1px solid #666;
+    font-family: Verdana, Arial, Helvetica;
 }
 #footer{
     clear:both;
@@ -250,6 +251,9 @@ span.intive_to_register{
     border: 1px solid #666;*/
 }
 
+.user{
+   font-weight: bolder;
+}
 .mainnav{
     position: absolute;
     top:  0px;
