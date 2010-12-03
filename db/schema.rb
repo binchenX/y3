@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101106053236) do
+ActiveRecord::Schema.define(:version => 20101203095914) do
 
   create_table "comments", :force => true do |t|
     t.string   "commenter"
@@ -24,11 +24,11 @@ ActiveRecord::Schema.define(:version => 20101106053236) do
   create_table "posts", :force => true do |t|
     t.string   "name"
     t.string   "title"
-    t.string   "content"
+    t.text     "content",      :limit => 255
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
-    t.integer  "vote_points",  :default => 0
+    t.integer  "vote_points",                 :default => 0
     t.text     "html_content"
   end
 

@@ -13,7 +13,7 @@ class HappyRobotController < ApplicationController
 
   def run
 
-    #Crawler_sjtu.run
+    Crawler_sjtu.run
     Douban.hosts.each {|host|
       puts "happy_robot will crawl #{host}"
       Cralwer_douban_events.crawl(host)
@@ -27,6 +27,15 @@ end
 Event = Struct.new :title, :link ,:date
 
 Album = Struct.new :title, :link
+
+class Where
+
+  def self.in_company?
+    #change to false when deploying
+    true
+  end
+end
+
 
 class Douban
 
@@ -44,7 +53,12 @@ class Douban
 
   #return a Nokogiri HTML object
   def self.get url
-    Nokogiri::HTML(open(url,:proxy => nil,'User-Agent' => 'ruby'),nil, "utf-8")
+    if Where.in_company?
+      #proxy needed.
+      Nokogiri::HTML(open(url,'User-Agent' => 'ruby'),nil, "utf-8")
+    else
+      Nokogiri::HTML(open(url,:proxy => nil,'User-Agent' => 'ruby'),nil, "utf-8")
+    end
     #For use within company network
     #Nokogiri::HTML(open(url,'User-Agent' => 'ruby'),nil, "utf-8")
   end
@@ -91,10 +105,9 @@ class Cralwer_douban_events
     #2. has not been posted/crawled
     events.select { |event|
 
-     #true #for test
-      Douban.parse_date(event.date) > today
-     #and
-     # Post.find_all_by_name_and_title("happy_robot",event.title).empty?
+      #true #for test
+      Douban.parse_date(event.date) > today and
+        Post.find_all_by_name_and_title("happy_robot",event.title).empty?
     }.each {|e|
       #grab the content pointed by e.link
       detail_page = Douban.get(e.link)
@@ -102,7 +115,7 @@ class Cralwer_douban_events
       html_content << "[来源]" + e.link
       Post.new(:name => "happy_robot",:title => e.title,:content => html_content,:tag_list => "show, 演出").save
       
-      }
+    }
 
   end
 end
@@ -110,9 +123,12 @@ end
 class Crawler_sjtu
 
   def self.get uri
-     #proxy should not be used in when in home , you could either unset http_proxy
-     #or set :proxy => nil
-    Nokogiri::HTML(open(uri,:proxy => nil,'User-Agent' => 'ruby'), nil, "GB18030")
+    if Where.in_company?
+      Nokogiri::HTML(open(uri,'User-Agent' => 'ruby'), nil, "GB18030")
+    else
+      Nokogiri::HTML(open(uri,:proxy => nil,'User-Agent' => 'ruby'), nil, "GB18030")
+    end
+    
   end
   def self.is_post_link? href
     href.include?"reid"
@@ -155,7 +171,7 @@ class Crawler_sjtu
 
       #if we have not saved it , save it
       interested_posts_in_current_page.each.select {|node|
-          Post.find_all_by_name_and_title("happy_robot", node.text).empty?
+        Post.find_all_by_name_and_title("happy_robot", node.text).empty?
       }.each do |node|
         link = @sjtu_bbs_root_uri + node['href']
         title = node.text
@@ -175,9 +191,9 @@ class Crawler_sjtu
         #</font></pre>
         #
         html_content = '<pre>' <<
-                    post.css('pre').first.to_s.split("\n")[2..-3].join("\n") <<
-                    '</pre>' <<
-                    "来源" + link
+          post.css('pre').first.to_s.split("\n")[2..-3].join("\n") <<
+          '</pre>' <<
+          "来源" + link
         #Let's save this post to our Model
         Post.new(:name => "happy_robot",:title => title,:content => html_content, :tag_list => "album,专辑").save
       end
