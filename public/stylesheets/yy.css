@@ -243,7 +243,7 @@ span.intive_to_register{
 #site-nav{
     position: absolute;
     top:  200px;
-    left: 300px;
+    left: 250px;
     width: 500px;
 
    /*debug only
@@ -259,7 +259,7 @@ span.intive_to_register{
 .new-post{
     position: absolute;
     top:  0px;
-    left: 275px;
+    left: 325px;
 }
 
 

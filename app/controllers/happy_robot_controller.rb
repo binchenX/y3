@@ -13,7 +13,7 @@ class HappyRobotController < ApplicationController
 
   def run
 
-    Crawler_sjtu.run
+    #Crawler_sjtu.run
     Douban.hosts.each {|host|
       puts "happy_robot will crawl #{host}"
       Cralwer_douban_events.crawl(host)
@@ -44,10 +44,10 @@ class Douban
 
   #return a Nokogiri HTML object
   def self.get url
-    Nokogiri::HTML(open(url,:proxy => nil,'User-Agent' => 'ruby'),nil, "utf-8")
+    #Nokogiri::HTML(open(url,:proxy => nil,'User-Agent' => 'ruby'),nil, "utf-8")
     #
     #For use within company network
-    #Nokogiri::HTML(open(url,'User-Agent' => 'ruby'),nil, "utf-8")
+    Nokogiri::HTML(open(url,'User-Agent' => 'ruby'),nil, "utf-8")
   end
 
   def self.is_event_link? href
