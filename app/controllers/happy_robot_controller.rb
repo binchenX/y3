@@ -13,7 +13,8 @@ class HappyRobotController < ApplicationController
 
   def run
 
-    Crawler_sjtu.run
+    #SJTU site has some encoding problem when working with PG database, it is fine with Sqlite
+    #Crawler_sjtu.run
     Douban.hosts.each {|host|
       puts "happy_robot will crawl #{host}"
       Cralwer_douban_events.crawl(host)
