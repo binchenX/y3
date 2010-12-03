@@ -16,13 +16,13 @@ body {
 }
 
 #post_title{
-   width: 100%
+    width: 100%
 
 }
 #post_content{
-   
-   width: 100%
-    
+
+    width: 100%
+
 }
 
 #comment_body{
@@ -31,7 +31,7 @@ body {
 /*for hr*/
 #rule_header{
     margin-bottom: 60px;
-    
+
 }
 h1 {font-size: 250%}
 
@@ -53,10 +53,10 @@ img {
 
 
 .post-page{
-    
-	
-	/*background-repeat: repeat ;*/
-	
+
+
+    /*background-repeat: repeat ;*/
+
     position: absolute;
     /*
     top: 70px;*/
@@ -89,7 +89,7 @@ img {
 
 .post-header{
 
-   /*use the box model as  indication*/
+    /*use the box model as  indication*/
 
     border-left:2px solid gray;
     border-right:2px solid gray;
@@ -100,20 +100,40 @@ img {
     padding-top: 0px;
     /*width: 60%;*/
     height: 75px; /* carefully selected */
-    background: url(/images/calendar.png) no-repeat;
+    background: transparent url(/images/calendar.png) no-repeat;
 }
 
 .post-happen-at{
+    position: absolute;
+    font-weight: bold;
+    
+}
+.post-happen-at-year{
+    position: absolute;
+    left : 35px;
+}
+.post-happen-at-month{
 
+    position: absolute;
+    top: 35px;
+    left: 25px;
+   
+
+}
+.post-happen-at-day{
+    position: absolute;
+    top: 35px;
+    left: 50px;
    
 }
 
 .post-title{
+    margin-top: 30px;
+    position: absolute;
+    left : 100px;
+   
 
-     position: absolute;
-     left : 100px;
 
-    
 }
 
 #main{
@@ -133,8 +153,8 @@ img {
     background-image: url(/images/post_bg.png);
     background-color: #EEF3E2;
     margin-bottom: 40px;
-   /*width: 96%;*/
-   /* padding: 10px;*/
+    /*width: 96%;*/
+    /* padding: 10px;*/
 
 }
 
@@ -231,7 +251,7 @@ span.intive_to_register{
 
 #side_bar{
 
-    
+
     width: 20%;
     float: right;
     height: 300px;
@@ -250,7 +270,7 @@ span.intive_to_register{
 
 #user_nav{
 
-   /* background-color: black;*/
+    /* background-color: black;*/
     float: right;
     /*
     left:150px;
@@ -264,12 +284,12 @@ span.intive_to_register{
     left: 250px;
     width: 500px;
 
-   /*debug only
-    border: 1px solid #666;*/
+    /*debug only
+     border: 1px solid #666;*/
 }
 
 .user{
-   font-weight: bolder;
+    font-weight: bolder;
 }
 .mainnav{
     position: absolute;
@@ -313,8 +333,8 @@ span.intive_to_register{
 }
 
 .nav ul li a:hover {
-  background-color: orange;
-  color: #FFF;
+    background-color: orange;
+    color: #FFF;
 
 }
 

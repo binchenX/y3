@@ -16,8 +16,9 @@
 <% end %>
 
 <div class="post-header">
- <strong> <%= @post.title %></strong>
- <hr />
+  <div class="post-title">
+       <%= @post.title %>
+  </div>
 </div>
 <div class="post-text">
   <%= raw(@post.html_content) %>
