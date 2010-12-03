@@ -11,6 +11,7 @@
       <div id="header">
         <div id="user_nav">
           <% if current_user %>
+            <span>Welcome </span><%= link_to current_user.login ,user_path(current_user.id),:class => "user" %><span>!</span>
             <%= link_to "Edit Profile" , edit_user_path(:current) %> |
             <%= link_to "Logout" , logout_path %>
           <% else %>
