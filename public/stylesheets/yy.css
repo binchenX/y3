@@ -84,6 +84,9 @@ img {
     */
 }
 
+
+
+
 .post-header{
 
    /*use the box model as  indication*/
@@ -96,7 +99,21 @@ img {
     margin-top: 0px;
     padding-top: 0px;
     /*width: 60%;*/
-    height: 28px; /* carefully selected */
+    height: 75px; /* carefully selected */
+    background: url(/images/calendar.png) no-repeat;
+}
+
+.post-happen-at{
+
+   
+}
+
+.post-title{
+
+     position: absolute;
+     left : 100px;
+
+    
 }
 
 #main{

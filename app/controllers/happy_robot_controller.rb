@@ -108,13 +108,19 @@ class Cralwer_douban_events
 
       #true #for test
       Douban.parse_date(event.date) > today and
-        Post.find_all_by_name_and_title("happy_robot",event.title).empty?
+      Post.find_all_by_name_and_title("happy_robot",event.title).empty?
     }.each {|e|
       #grab the content pointed by e.link
       detail_page = Douban.get(e.link)
       html_content = detail_page.css("div.wr#edesc_s").to_s
       html_content << "[来源]" + e.link
-      Post.new(:name => "happy_robot",:title => e.title,:content => html_content,:tag_list => "show, 演出").save
+      happen_at = Douban.parse_date(e.date).strftime("%Y-%m-%d");
+      Post.new(:name => "happy_robot",
+            :title => e.title,
+            :content => html_content,
+            :tag_list => "show, 演出",
+            :happen_at => happen_at
+           ).save
       
     }
 

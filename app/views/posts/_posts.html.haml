@@ -2,7 +2,12 @@
 
 - posts.each do |post|
     %div.post-header
-        %p= link_to post.title , post
+        %div.post-happen-at
+            %span= post.happen_at.year
+            %span= post.happen_at.month
+            %span= post.happen_at.day
+        %div.post-title
+            %p= link_to post.title , post
     %div.post-text
         %p= raw(post.html_content)
 -# don't show tags in summary

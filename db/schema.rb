@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101203095914) do
+ActiveRecord::Schema.define(:version => 20101203114052) do
 
   create_table "comments", :force => true do |t|
     t.string   "commenter"
@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(:version => 20101203095914) do
     t.integer  "user_id"
     t.integer  "vote_points",                 :default => 0
     t.text     "html_content"
+    t.datetime "happen_at"
   end
 
   create_table "taggings", :force => true do |t|

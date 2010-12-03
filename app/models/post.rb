@@ -22,6 +22,8 @@ class Post < ActiveRecord::Base
     10
   end
 
+
+  
 #  def vote(post)
 #    #self.votes.where(:user_id => post.id).first
 #    self.votes.first
