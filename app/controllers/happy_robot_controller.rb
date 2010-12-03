@@ -14,7 +14,10 @@ class HappyRobotController < ApplicationController
   def run
 
     Crawler_sjtu.run
-    Douban.hosts.each {|host| Cralwer_douban_events.crawl(host) }
+    Douban.hosts.each {|host|
+      puts "happy_robot will crawl #{host}"
+      Cralwer_douban_events.crawl(host)
+    }
     redirect_to posts_path
   end
  
@@ -35,12 +38,16 @@ class Douban
       "http://www.douban.com/host/zjdreams/events",
       "http://www.douban.com/host/livebar696/events",
       "http://www.douban.com/host/maolivehouse/events"
+
     ]
   end
 
   #return a Nokogiri HTML object
   def self.get url
     Nokogiri::HTML(open(url,:proxy => nil,'User-Agent' => 'ruby'),nil, "utf-8")
+    #
+    #For use within company network
+    #Nokogiri::HTML(open(url,'User-Agent' => 'ruby'),nil, "utf-8")
   end
 
   def self.is_event_link? href
@@ -84,14 +91,17 @@ class Cralwer_douban_events
     #1. has not happened and
     #2. has not been posted/crawled
     events.select { |event|
-      Douban.parse_date(event.date) > today and
-      Post.find_all_by_name_and_title("happy_robot",event.title).empty?
+
+     #true #for test
+      Douban.parse_date(event.date) > today
+     #and
+     # Post.find_all_by_name_and_title("happy_robot",event.title).empty?
     }.each {|e|
       #grab the content pointed by e.link
       detail_page = Douban.get(e.link)
       html_content = detail_page.css("div.wr#edesc_s").to_s
-      html_content << "来源" + e.link
-      Post.new(:name => "happy_robot",:title => e.title,:html_content => html_content,:tag_list => "show, 演出").save
+      html_content << "[来源]" + e.link
+      Post.new(:name => "happy_robot",:title => e.title,:content => html_content,:tag_list => "show, 演出").save
       
       }
 
@@ -103,7 +113,6 @@ class Crawler_sjtu
   def self.get uri
      #proxy should not be used in when in home , you could either unset http_proxy
      #or set :proxy => nil
-     #doc = Nokogiri::HTML(open(page_uri,:proxy => nil, 'User-Agent' => 'ruby'), nil, "GB18030")
     Nokogiri::HTML(open(uri,:proxy => nil,'User-Agent' => 'ruby'), nil, "GB18030")
   end
   def self.is_post_link? href
@@ -171,7 +180,7 @@ class Crawler_sjtu
                     '</pre>' <<
                     "来源" + link
         #Let's save this post to our Model
-        Post.new(:name => "happy_robot",:title => title,:html_content => html_content, :tag_list => "album,专辑").save
+        Post.new(:name => "happy_robot",:title => title,:content => html_content, :tag_list => "album,专辑").save
       end
 
       previous_page_url =  @sjtu_bbs_root_uri + doc.xpath('//a').select {|node| node.text.include?"上一页"}.first["href"]
