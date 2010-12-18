@@ -33,7 +33,8 @@ class Where
 
   def self.in_company?
     #change to false when deploying
-    true
+    #true
+    false
   end
 end
 
