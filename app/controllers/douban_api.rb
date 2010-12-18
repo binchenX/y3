@@ -13,7 +13,7 @@ end
 
 
 #return Atom 
-def get key_chinese, location
+def get key_chinese, location = "shanghai"
 
   keywords= "%" + key_chinese.each_byte.map {|c| c.to_s(16)}.join("%")
   uri="http://api.douban.com/events?q=#{keywords}&location=#{location}&start-index=2&max-results=1"
@@ -21,7 +21,10 @@ def get key_chinese, location
 end
 
 
-doc = get "马条", "shanghai"
+
+
+def update artist
+doc = get artist 
 doc.xpath("//entry").each do |entry|
   #pp entry
   title = entry.at_xpath(".//title").text
@@ -35,4 +38,10 @@ doc.xpath("//entry").each do |entry|
   puts start
   puts city
   puts where
+end
+end
+
+File.read("artists.txt").split("\n").each do |artist|
+	puts artist
+	update artist
 end
