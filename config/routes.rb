@@ -1,4 +1,6 @@
 Yy::Application.routes.draw do
+  resources :artists
+
   get "tag/show"
 
   resources :posts do
@@ -20,6 +22,7 @@ Yy::Application.routes.draw do
   
   resources :user_sessions
   resources :users
+  resources :artists
   #resources :votes
 
   # The priority is based upon order of creation:

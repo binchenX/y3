@@ -21,17 +21,18 @@ def get key_chinese, location
 end
 
 
-
 doc = get "马条", "shanghai"
 doc.xpath("//entry").each do |entry|
   #pp entry
   title = entry.at_xpath(".//title").text
   link =  entry.at_xpath(".//link[@rel='alternate']")["href"]
   #attribute is starttime NOT startTime as specified in the xml
-  start = entry.at_xpath('.//gd:when')["starttime"]
-  location = entry.at_xpath('.//location').text
+  start = entry.at_xpath('.//when')["starttime"]
+  city = entry.at_xpath('.//location').text
+  where = entry.at_xpath('.//where')["valuestring"]
   puts title
   puts link
   puts start
-  puts location
+  puts city
+  puts where
 end

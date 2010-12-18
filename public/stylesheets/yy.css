@@ -131,9 +131,6 @@ img {
     margin-top: 30px;
     position: absolute;
     left : 100px;
-   
-
-
 }
 
 #main{
@@ -281,8 +278,8 @@ span.intive_to_register{
 #site-nav{
     position: absolute;
     top:  200px;
-    left: 250px;
-    width: 500px;
+    left: 150px;
+    width: 600px;
 
     /*debug only
      border: 1px solid #666;*/
@@ -300,7 +297,7 @@ span.intive_to_register{
 .new-post{
     position: absolute;
     top:  0px;
-    left: 325px;
+    left: 400px;
 }
 
 
@@ -395,3 +392,8 @@ span.intive_to_register{
 
 
 
+#add_an_artist{
+    font-size: 20px;
+    font-weight: bolder;
+    background: red;
+}

@@ -1,0 +1,16 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @artist.name %>
+</p>
+
+<p>
+  <b>Intro:</b>
+  <%= @artist.intro %>
+</p>
+
+
+<%= link_to 'Destroy', @artist, :confirm => 'Are you sure?', :method => :delete %>
+<%= link_to 'Edit', edit_artist_path(@artist) %> |
+<%= link_to 'All', artists_path %>
