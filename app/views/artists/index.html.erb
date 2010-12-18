@@ -1,15 +1,18 @@
 <h3>我们  只   关注以下歌手/乐队</h3>
 <h3>我们  只   关注   最真诚的中国摇滚 最纯粹的中国民谣</h3>
 
+<%= link_to '我来加一个', new_artist_path , object_id => "add_an_artist" %>
+
+<hr />
+
 <table>
 <% @artists.each do |artist| %>
   <tr>
     <td><%= link_to artist.name, artist %></td>
-   
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to '我来加一个', new_artist_path , object_id => "add_an_artist" %>
+
