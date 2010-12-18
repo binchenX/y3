@@ -1,13 +1,13 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Name:</b>
-  <%= @artist.name %>
-</p>
+
+<h3>歌手/乐队: <%= @artist.name %></h3>
+
 
 <p>
-  <b>Intro:</b>
-  <%= @artist.intro %>
+  <b>为什么值得关注(推荐专辑):</b> 
+  <%= raw(@artist.html_intro) %>
+ 
 </p>
 
 
