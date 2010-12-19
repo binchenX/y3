@@ -42,6 +42,7 @@ end
 
 #TEST....
 
+=begin
 #should use Artist Model
 #File.read("./app/controllers/artists.txt").split("\n").each {|artist| Artist.new(:name=>artist,:intro=>"no").save}
 #Artist.all.each {|a| puts a.name}
@@ -56,4 +57,4 @@ File.read("artists.txt").split("\n").each do |artist|
 
   end
 end
-
+=end

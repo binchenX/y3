@@ -21,12 +21,27 @@ class HappyRobotController < ApplicationController
       Cralwer_douban_events.crawl(host)
     }
 =end
-  #Let's use douban API
+    #Let's use douban API
 
-  Artist.all.each do |artist|
+    Artist.all.each do |artist|
       puts artist.name
-  end
-  redirect_to posts_path
+      e = search_events_of artist.name
+      e.each do |event|
+        puts event.title
+        puts event.when
+        puts event.where
+        puts event.what
+
+        happen_at = Douban.parse_date(event.when).strftime("%Y-%m-%d");
+        Post.new(:name => "happy_robot",
+          :title => event.title,
+          :content => event.what,
+          :tag_list => "show, 演出",
+          :happen_at => happen_at
+        ).save
+      end
+    end
+    redirect_to posts_path
   end
  
 
@@ -79,6 +94,8 @@ class Douban
   #return Time object
   #date format is
   #"时间：2010年8月13日 周五 21:30 -  23:55"
+  #or
+  #2010-08-13F21:30:00+08:00
   def self.parse_date date
     year, month , day = date.scan(/\d{1,4}/)
     Time.local(year,month,day)
@@ -116,7 +133,7 @@ class Cralwer_douban_events
 
       #true #for test
       Douban.parse_date(event.date) > today and
-      Post.find_all_by_name_and_title("happy_robot",event.title).empty?
+        Post.find_all_by_name_and_title("happy_robot",event.title).empty?
     }.each {|e|
       #grab the content pointed by e.link
       detail_page = Douban.get(e.link)
@@ -124,11 +141,11 @@ class Cralwer_douban_events
       html_content << "[来源]" + e.link
       happen_at = Douban.parse_date(e.date).strftime("%Y-%m-%d");
       Post.new(:name => "happy_robot",
-            :title => e.title,
-            :content => html_content,
-            :tag_list => "show, 演出",
-            :happen_at => happen_at
-           ).save
+        :title => e.title,
+        :content => html_content,
+        :tag_list => "show, 演出",
+        :happen_at => happen_at
+      ).save
       
     }
 
