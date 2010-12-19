@@ -2,6 +2,7 @@ require 'rubygems'  #a hack to require failure for nokogiri
 require 'open-uri'
 require 'nokogiri'
 require 'pp'
+require 'douban_api'
 
 
 class HappyRobotController < ApplicationController
@@ -12,14 +13,20 @@ class HappyRobotController < ApplicationController
 
 
   def run
-
+=begin
     #SJTU site has some encoding problem when working with PG database, it is fine with Sqlite
     #Crawler_sjtu.run
     Douban.hosts.each {|host|
       puts "happy_robot will crawl #{host}"
       Cralwer_douban_events.crawl(host)
     }
-    redirect_to posts_path
+=end
+  #Let's use douban API
+
+  Artist.all.each do |artist|
+      puts artist.name
+  end
+  redirect_to posts_path
   end
  
 
