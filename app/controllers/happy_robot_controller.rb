@@ -3,7 +3,7 @@ require 'open-uri'
 require 'nokogiri'
 require 'pp'
 require 'douban_api'
-
+require 'rdiscount'
 
 class HappyRobotController < ApplicationController
   def initialize
@@ -22,11 +22,10 @@ class HappyRobotController < ApplicationController
     }
 =end
     #Let's use douban API
-
-    #Artist.all.each do |artist|
+    Artist.all.each do |artist|
       #puts artist.name
-      #e = search_events_of artist.name
-      e = search_events_of "许巍"
+      e = search_events_of artist.name
+      #e = search_events_of "许巍"
       e.each do |event|
         puts event.title
         puts event.when
@@ -36,14 +35,16 @@ class HappyRobotController < ApplicationController
         happen_at = Douban.parse_date(event.when).strftime("%Y-%m-%d");
 		#strip the tab/space at the begin of each scentence 
 		markdown_content = event.what.split("\n").map {|s| s.lstrip}.join("\n\r")
-        Post.new(:name => "happy_robot",
+     	#2 times so as to display correct
+	    #markdown_content = RDiscount.new(markdown_content).to_html
+		Post.new(:name => "happy_robot",
           :title => event.title,
           :content => markdown_content ,
           :tag_list => "show, 演出",
           :happen_at => happen_at
         ).save
       end
-    #end
+    end
     redirect_to posts_path
   end
  
