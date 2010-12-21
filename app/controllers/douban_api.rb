@@ -6,13 +6,14 @@ require 'pp'
 #return a Nokogiri XML  object
 #use Douban API
 def douban_get_xml url
-   #Nokogiri::HTML(open(url,'User-Agent' => 'ruby'),nil, "utf-8")
-	puts url
-	#doc = open(url,'User-Agent' => 'ruby')
-	doc = File.read(File.join(RAILS_ROOT, "app","controllers","event_sample.xml"))
-	puts doc.inspect
-	Nokogiri::HTML(doc,nil, "utf-8")
-  # Nokogiri::HTML(open(url,:proxy => nil,'User-Agent' => 'ruby'),nil, "utf-8")
+#	puts url
+    Nokogiri::HTML(open(url,'User-Agent' => 'ruby'),nil, "utf-8")
+    #Nokogiri::HTML(open(url,:proxy => nil,'User-Agent' => 'ruby'),nil, "utf-8")
+	
+	#no network access, used to simulator 
+	#doc = File.read(File.join(RAILS_ROOT, "app","controllers","event_sample.xml"))
+	#Nokogiri::HTML(doc,nil, "utf-8")
+    #Nokogiri::HTML(open(url,:proxy => nil,'User-Agent' => 'ruby'),nil, "utf-8")
 end
 
 
@@ -22,7 +23,7 @@ def search key_chinese, location = "shanghai"
   keywords= "%" + key_chinese.each_byte.map {|c| c.to_s(16)}.join("%")
   uri="http://api.douban.com/events?q=#{keywords}&location=#{location}&start-index=2&max-results=1"
   #Let's grab it slowly to avoid being baned...	
-  sleep(1)	
+  sleep(7) 	
   douban_get_xml(uri)
 end
 

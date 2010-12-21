@@ -24,6 +24,7 @@ class HappyRobotController < ApplicationController
     #Let's use douban API
     Artist.all.each do |artist|
       #puts artist.name
+      puts "search events for " + artist.name
       e = search_events_of artist.name
       #e = search_events_of "许巍"
       e.each do |event|
