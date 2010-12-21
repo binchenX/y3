@@ -6,8 +6,13 @@ require 'pp'
 #return a Nokogiri XML  object
 #use Douban API
 def douban_get_xml url
-  # Nokogiri::HTML(open(url,'User-Agent' => 'ruby'),nil, "utf-8")
-  Nokogiri::HTML(open(url,:proxy => nil,'User-Agent' => 'ruby'),nil, "utf-8")
+   #Nokogiri::HTML(open(url,'User-Agent' => 'ruby'),nil, "utf-8")
+	puts url
+	#doc = open(url,'User-Agent' => 'ruby')
+	doc = File.read(File.join(RAILS_ROOT, "app","controllers","event_sample.xml"))
+	puts doc.inspect
+	Nokogiri::HTML(doc,nil, "utf-8")
+  # Nokogiri::HTML(open(url,:proxy => nil,'User-Agent' => 'ruby'),nil, "utf-8")
 end
 
 
@@ -16,6 +21,8 @@ end
 def search key_chinese, location = "shanghai"
   keywords= "%" + key_chinese.each_byte.map {|c| c.to_s(16)}.join("%")
   uri="http://api.douban.com/events?q=#{keywords}&location=#{location}&start-index=2&max-results=1"
+  #Let's grab it slowly to avoid being baned...	
+  sleep(1)	
   douban_get_xml(uri)
 end
 
@@ -40,21 +47,20 @@ def search_events_of artist
 end
 
 
-#TEST....
 
-=begin
+if __FILE__== $0
 #should use Artist Model
 #File.read("./app/controllers/artists.txt").split("\n").each {|artist| Artist.new(:name=>artist,:intro=>"no").save}
 #Artist.all.each {|a| puts a.name}
 File.read("artists.txt").split("\n").each do |artist|
 	puts artist
 	e = search_events_of artist
-  e.each do |event|
-    puts event.title
-    puts event.when
-    puts event.where
-    puts event.what
-
+  	e.each do |event|
+    	puts event.title
+  		puts event.when
+  		puts event.where
+        puts event.what
   end
 end
-=end
+end
+

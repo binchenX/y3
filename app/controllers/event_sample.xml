@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:db="http://www.douban.com/xmlns/" xmlns:gd="http://schemas.google.com/g/2005" xmlns:openSearch="http://a9.com/-/spec/opensearchrss/1.0/" xmlns:opensearch="http://a9.com/-/spec/opensearchrss/1.0/">
+	<title>豆瓣同城上海活动搜索 杨嘉松 的结果</title>
+	<entry xmlns:georss="http://www.georss.org/georss">
+		<id>http://api.douban.com/event/13104269</id>
+		<title>“榕树下民谣在路上”1月3号再战上海</title>
+		<category scheme="http://www.douban.com/2007#kind" term="http://www.douban.com/2007#event.music"/>
+		<link href="http://api.douban.com/event/13104269" rel="self"/>
+		<link href="http://www.douban.com/event/13104269/" rel="alternate"/>
+		<link href="http://img3.douban.com/mpic/e371416.jpg" rel="image"/>
+		<summary>时间：2011年1月3日20:30
+演出嘉宾：川子、马条、钟立风、杨嘉松
+场馆：Mao Livehouse
+门票：RMB100（预售）/RMB120（现场）
+地点: 上海 长宁区 淮海西路570号32幢 MAO livehouse
+
+订票邮箱：mao-reserve@live.com 
+(订票请留下您的姓名、手机号码和演出名称，我们将登记在册，在24小时内回复即预定成功，届时您将在现场取票） 
+订票一...</summary>
+		<content>时间：2011年1月3日20:30
+演出嘉宾：川子、马条、钟立风、杨嘉松
+场馆：Mao Livehouse
+门票：RMB100（预售）/RMB120（现场）
+地点: 上海 长宁区 淮海西路570号32幢 MAO livehouse
+
+订票邮箱：mao-reserve@live.com 
+(订票请留下您的姓名、手机号码和演出名称，我们将登记在册，在24小时内回复即预定成功，届时您将在现场取票） 
+订票一律截止到演出当天中午12点结束 
+如遇有特别说明票务方案的场次,请依照主办方的说明进行购票 
+咨询电话：021-5258 9999（周一至周五13:00--19:00） 
+
+
+
+“要走多少路，要唱多少歌，才能到达你的心里？” 2010年事关民谣的关键词“民谣在路上”使民谣在浮躁的社会中“逆市上扬”成为时尚。 2011年民谣将继续在路上陪伴你远行，让民谣在这个浮躁的时代抚慰我们、温暖我们。民谣复兴运动的领军者十三月唱片将携行走无疆“榕树下民谣在路上”继续为你歌唱。
+     行者无疆“榕树下民谣在路上”全国巡演路线基本确定：上海、杭州、南京、广州、深圳、长沙、武汉、西安、青岛……26个城市温暖开唱，集结全国民谣最顶尖阵容，标杆性的民谣领军人物，让民谣再一次隆重启程，再次回到你们可以看见的地方、你们可以听见的地方。
+十三月唱片行走无疆“榕树下民谣在路上”全国巡演，2011年1月1日在上海站重新启航。在2010年已经走过了北京、青岛、杭州、武汉等地，被不少业界人士称为“民谣复兴运动”的“榕树理民谣在路上”全国巡演，2011年1月，上海站演出将分别在1号和3号在Mao Livehouse 举行。
+2010年，“榕树下民谣在路上”对喜欢音乐的人来说是一个特殊的标记。此次行走无疆“榕树下民谣在路上”全国巡演将在2011年元旦在上海为新一年的演出拉开帏幕，参演的民谣艺人有川子、马条、万晓利、钟立风、杨嘉松。
+
+豆瓣音乐人链接： 
+川子：http://www.douban.com/artist/chuanzi/ 
+马条：http://www.douban.com/artist/matiao/ 
+钟立风：http://www.douban.com/artist/zhonglifeng/</content>
+		<db:attribute name="invite_only">no</db:attribute>
+		<db:attribute name="can_invite">yes</db:attribute>
+		<db:attribute name="participants">4</db:attribute>
+		<db:attribute name="wishers">7</db:attribute>
+		<db:attribute name="album">38683941</db:attribute>
+		<db:location id="shanghai">上海</db:location>
+		<gd:when endTime="2011-01-03T23:55:00+08:00" startTime="2011-01-03T20:30:00+08:00"/>
+		<gd:where valueString="上海 长宁区 淮海西路570号32幢（近红坊）"/>
+		<georss:point>31.197701 121.424484</georss:point>
+	</entry>
+	<openSearch:itemsPerPage>1</openSearch:itemsPerPage>
+	<openSearch:startIndex>2</openSearch:startIndex>
+	<openSearch:totalResults>2</openSearch:totalResults>
+</feed>

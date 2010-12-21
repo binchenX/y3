@@ -14,9 +14,9 @@ module Markdownable
     #is not nil.
 
     #this function will called when update
-    if not self.content.nil?  #post by the User, we have to convert content to html_content
+    #if not self.content.nil?  #post by the User, we have to convert content to html_content
       self.html_content = RDiscount.new(content).to_html
-    end
+    #end
   end
 
 

@@ -23,9 +23,10 @@ class HappyRobotController < ApplicationController
 =end
     #Let's use douban API
 
-    Artist.all.each do |artist|
-      puts artist.name
-      e = search_events_of artist.name
+    #Artist.all.each do |artist|
+      #puts artist.name
+      #e = search_events_of artist.name
+      e = search_events_of "许巍"
       e.each do |event|
         puts event.title
         puts event.when
@@ -33,14 +34,16 @@ class HappyRobotController < ApplicationController
         puts event.what
 
         happen_at = Douban.parse_date(event.when).strftime("%Y-%m-%d");
+		#strip the tab/space at the begin of each scentence 
+		markdown_content = event.what.split("\n").map {|s| s.lstrip}.join("\n\r")
         Post.new(:name => "happy_robot",
           :title => event.title,
-          :content => event.what,
+          :content => markdown_content ,
           :tag_list => "show, 演出",
           :happen_at => happen_at
         ).save
       end
-    end
+    #end
     redirect_to posts_path
   end
  

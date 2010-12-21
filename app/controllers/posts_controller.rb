@@ -42,7 +42,12 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.xml
   def create
-    @post = Post.new(params[:post].merge(:user => current_user))
+	#TODO:check if happen_at was specifid
+    @post = Post.new(params[:post].
+					 merge(:user => current_user,
+	     			       :happen_at => Time.now.strftime("%Y-%m-%d")
+					      )
+					)
 
 #    #if user has already logined int, set the user
 #    if current_user
