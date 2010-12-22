@@ -12,6 +12,8 @@ class HappyRobotController < ApplicationController
   end
 
 
+
+
   def run
 =begin
     #SJTU site has some encoding problem when working with PG database, it is fine with Sqlite
@@ -22,30 +24,34 @@ class HappyRobotController < ApplicationController
     }
 =end
     #Let's use douban API
-    Artist.all.each do |artist|
-      #puts artist.name
-      puts "search events for " + artist.name
-      e = search_events_of artist.name
+    #Artist.all.each do |artist|
+      #puts "search events for " + artist.name
+      #e = search_events_of artist.name
       #e = search_events_of "许巍"
+      e = search_events_of "野孩子" 
       e.each do |event|
         puts event.title
         puts event.when
         puts event.where
         puts event.what
 
+		#TODO:check where it happens to decide if it looks like a live show
+  		
+
         happen_at = Douban.parse_date(event.when).strftime("%Y-%m-%d");
 		#strip the tab/space at the begin of each scentence 
-		markdown_content = event.what.split("\n").map {|s| s.lstrip}.join("\n\r")
+		#"\n\n" is needed so it can be display correctly
+		markdown_content = event.what.split("\n").map {|s| s.lstrip}.join("\n\n")
      	#2 times so as to display correct
 	    #markdown_content = RDiscount.new(markdown_content).to_html
 		Post.new(:name => "happy_robot",
           :title => event.title,
           :content => markdown_content ,
-          :tag_list => "show, 演出",
+          #:tag_list => "show, 演出 , #{artist.name}",
           :happen_at => happen_at
         ).save
       end
-    end
+   # end
     redirect_to posts_path
   end
  

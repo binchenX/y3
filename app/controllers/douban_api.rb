@@ -18,7 +18,8 @@ end
 
 
 
-#return Atom 
+#return Atom
+#Douban search : will return results that does not match 
 def search key_chinese, location = "shanghai"
   keywords= "%" + key_chinese.each_byte.map {|c| c.to_s(16)}.join("%")
   uri="http://api.douban.com/events?q=#{keywords}&location=#{location}&start-index=2&max-results=1"
@@ -29,6 +30,19 @@ end
 
 
 Douban_Event =  Struct.new :title, :when, :where, :what,:link
+
+
+#TODO
+def looks_like_a_live_show? e
+
+	#check e.when should happen
+	#2010-08-13F21:30:00+08:00
+	_,_,_,hour = e.when.scan(/\d{1,4}/);
+
+	puts "==========================events happend at #{hour}"
+	return true if hour.to_i > 18
+	return false
+end
 
 def search_events_of artist
   doc = search artist
@@ -44,7 +58,9 @@ def search_events_of artist
     what = entry.at_xpath(".//content").text
     events << Douban_Event.new(title, start_time, where, what, link)
   end
-  events
+	
+  #filtering of the results
+  events.select{|e| looks_like_a_live_show?(e)}
 end
 
 
