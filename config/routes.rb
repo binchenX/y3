@@ -15,6 +15,7 @@ Yy::Application.routes.draw do
 
   get "home/index"
 
+  match 'rss'  => 'posts#rss'
   match 'login' => 'user_sessions#new'
   match 'logout' => 'user_sessions#destroy'
   match 'crawl' => 'happy_robot#run'
