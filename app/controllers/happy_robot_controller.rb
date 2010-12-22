@@ -101,7 +101,6 @@ class Douban
         puts event.where
         puts event.what
 
-		#TODO:check where it happens to decide if it looks like a live show
   		
 
         happen_at = Douban.parse_date(event.when).strftime("%Y-%m-%d");
@@ -110,12 +109,15 @@ class Douban
 		markdown_content = event.what.split("\n").map {|s| s.lstrip}.join("\n\n")
      	#2 times so as to display correct
 	    #markdown_content = RDiscount.new(markdown_content).to_html
-		Post.new(:name => "happy_robot",
-          :title => event.title,
-          :content => markdown_content ,
-          :tag_list => "show, 演出 , #{artist.name}",
-          :happen_at => happen_at
-        ).save
+
+        if Post.find_all_by_name_and_title("happy_robot",event.title).empty? and event.when > Time.now 
+			Post.new(:name => "happy_robot",
+        	:title => event.title,
+         	:content => markdown_content ,
+          	:tag_list => "show, 演出 , #{artist.name}",
+          	:happen_at => happen_at
+       		).save
+		end
       end
     end
   end
