@@ -89,11 +89,13 @@ class Douban
   end
 
   def self.crawl_by_artist
-  #Let's use douban API
+    #Let's use douban API
     Artist.all.each do |artist|
       puts "search events for " + artist.name
       e = search_events_of artist.name
-      #e = search_events_of "许巍"
+   
+	  #comment out :tag_list when test
+	  #e = search_events_of "许巍"
       #e = search_events_of "野孩子" 
       e.each do |event|
         puts event.title
@@ -107,10 +109,8 @@ class Douban
 		#strip the tab/space at the begin of each scentence 
 		#"\n\n" is needed so it can be display correctly
 		markdown_content = event.what.split("\n").map {|s| s.lstrip}.join("\n\n")
-     	#2 times so as to display correct
-	    #markdown_content = RDiscount.new(markdown_content).to_html
 
-        if Post.find_all_by_name_and_title("happy_robot",event.title).empty? and event.when > Time.now 
+        if Post.find_all_by_name_and_title("happy_robot",event.title).empty? and Douban.parse_date(event.when) > Time.now 
 			Post.new(:name => "happy_robot",
         	:title => event.title,
          	:content => markdown_content ,
@@ -120,7 +120,7 @@ class Douban
 		end
       end
     end
-  end
+  end#define crawl_by_artist
 end
 
 

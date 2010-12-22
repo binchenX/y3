@@ -22,7 +22,7 @@ end
 #Douban search : will return results that does not match 
 def search key_chinese, location = "shanghai"
   keywords= "%" + key_chinese.each_byte.map {|c| c.to_s(16)}.join("%")
-  uri="http://api.douban.com/events?q=#{keywords}&location=#{location}&start-index=2&max-results=1"
+  uri="http://api.douban.com/events?q=#{keywords}&location=#{location}&start-index=1&max-results=5"
   #Let's grab it slowly to avoid being baned...	
   sleep(7) 	
   douban_get_xml(uri)
@@ -39,7 +39,7 @@ def looks_like_a_live_show? e, artist
 	#2010-08-13F21:30:00+08:00
 	_,_,_,hour = e.when.scan(/\d{1,4}/);
 
-	puts "==========================events happend at #{hour}"
+	puts "==========================events happend at #{e.when},  #{hour}"
 	return true if hour.to_i > 18 and e.what.include?(artist)
 	return false
 end
