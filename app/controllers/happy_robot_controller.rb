@@ -23,37 +23,13 @@ class HappyRobotController < ApplicationController
       Cralwer_douban_events.crawl(host)
     }
 =end
-    #Let's use douban API
-    Artist.all.each do |artist|
-      puts "search events for " + artist.name
-      e = search_events_of artist.name
-      #e = search_events_of "许巍"
-      #e = search_events_of "野孩子" 
-      e.each do |event|
-        puts event.title
-        puts event.when
-        puts event.where
-        puts event.what
-
-		#TODO:check where it happens to decide if it looks like a live show
-  		
-
-        happen_at = Douban.parse_date(event.when).strftime("%Y-%m-%d");
-		#strip the tab/space at the begin of each scentence 
-		#"\n\n" is needed so it can be display correctly
-		markdown_content = event.what.split("\n").map {|s| s.lstrip}.join("\n\n")
-     	#2 times so as to display correct
-	    #markdown_content = RDiscount.new(markdown_content).to_html
-		Post.new(:name => "happy_robot",
-          :title => event.title,
-          :content => markdown_content ,
-          :tag_list => "show, 演出 , #{artist.name}",
-          :happen_at => happen_at
-        ).save
-      end
-    end
-    redirect_to posts_path
+    self.crawl
+	redirect_to posts_path
   end
+
+  def self.crawl
+	Douban.crawl_by_artist   
+  end	
  
 
 end
@@ -110,6 +86,38 @@ class Douban
   def self.parse_date date
     year, month , day = date.scan(/\d{1,4}/)
     Time.local(year,month,day)
+  end
+
+  def self.crawl_by_artist
+  #Let's use douban API
+    Artist.all.each do |artist|
+      puts "search events for " + artist.name
+      e = search_events_of artist.name
+      #e = search_events_of "许巍"
+      #e = search_events_of "野孩子" 
+      e.each do |event|
+        puts event.title
+        puts event.when
+        puts event.where
+        puts event.what
+
+		#TODO:check where it happens to decide if it looks like a live show
+  		
+
+        happen_at = Douban.parse_date(event.when).strftime("%Y-%m-%d");
+		#strip the tab/space at the begin of each scentence 
+		#"\n\n" is needed so it can be display correctly
+		markdown_content = event.what.split("\n").map {|s| s.lstrip}.join("\n\n")
+     	#2 times so as to display correct
+	    #markdown_content = RDiscount.new(markdown_content).to_html
+		Post.new(:name => "happy_robot",
+          :title => event.title,
+          :content => markdown_content ,
+          :tag_list => "show, 演出 , #{artist.name}",
+          :happen_at => happen_at
+        ).save
+      end
+    end
   end
 end
 

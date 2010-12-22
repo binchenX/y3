@@ -18,8 +18,10 @@ namespace :rf do
 
 
 	desc "crawl new information"
-	task :crawl => :environment do 
+	task :c => :environment do 
 		puts "start crawling..."
+		HappyRobotController.crawl
+		puts "Finish crawling..."
 	end
 
 end
