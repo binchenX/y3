@@ -24,11 +24,11 @@ class HappyRobotController < ApplicationController
     }
 =end
     #Let's use douban API
-    #Artist.all.each do |artist|
-      #puts "search events for " + artist.name
-      #e = search_events_of artist.name
+    Artist.all.each do |artist|
+      puts "search events for " + artist.name
+      e = search_events_of artist.name
       #e = search_events_of "许巍"
-      e = search_events_of "野孩子" 
+      #e = search_events_of "野孩子" 
       e.each do |event|
         puts event.title
         puts event.when
@@ -47,11 +47,11 @@ class HappyRobotController < ApplicationController
 		Post.new(:name => "happy_robot",
           :title => event.title,
           :content => markdown_content ,
-          #:tag_list => "show, 演出 , #{artist.name}",
+          :tag_list => "show, 演出 , #{artist.name}",
           :happen_at => happen_at
         ).save
       end
-   # end
+    end
     redirect_to posts_path
   end
  

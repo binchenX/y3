@@ -33,14 +33,14 @@ Douban_Event =  Struct.new :title, :when, :where, :what,:link
 
 
 #TODO
-def looks_like_a_live_show? e
+def looks_like_a_live_show? e, artist
 
 	#check e.when should happen
 	#2010-08-13F21:30:00+08:00
 	_,_,_,hour = e.when.scan(/\d{1,4}/);
 
 	puts "==========================events happend at #{hour}"
-	return true if hour.to_i > 18
+	return true if hour.to_i > 18 and e.what.include?(artist)
 	return false
 end
 
@@ -60,7 +60,7 @@ def search_events_of artist
   end
 	
   #filtering of the results
-  events.select{|e| looks_like_a_live_show?(e)}
+  events.select{|e| looks_like_a_live_show?(e,artist)}
 end
 
 
