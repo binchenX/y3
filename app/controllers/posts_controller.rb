@@ -93,4 +93,10 @@ class PostsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
+  def rss
+	@posts = Post.find(:all, :order => "created_at", :limit => 10)
+	render :layout => false
+    response.headers["Content-Type"] = "application/xml; charset=utf-8" 
+  end
 end
