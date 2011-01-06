@@ -2,7 +2,8 @@ require 'rubygems'  #a hack to require failure for nokogiri
 require 'open-uri'
 require 'nokogiri'
 require 'pp'
-require 'douban_api'
+#require 'douban_api'
+require 'doubapi'
 require 'rdiscount'
 
 class HappyRobotController < ApplicationController
@@ -92,7 +93,7 @@ class Douban
     #Let's use douban API
     Artist.all.each do |artist|
       puts "search events for " + artist.name
-      e = search_events_of artist.name
+      e = Doubapi.search_events_of artist.name
    
 	  #comment out :tag_list when test
 	  #e = search_events_of "许巍"
