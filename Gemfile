@@ -14,7 +14,7 @@ gem "haml", "~> 3.0.13"
 gem "formtastic", "~> 1.1.0"
 gem "acts-as-taggable-on", "~> 2.0.6"
 gem "simple-rss"
-gem "doubapi"
+gem "doubapi" , "~> 0.0.5"
 # Use unicorn as the web server
 # gem 'unicorn'
 

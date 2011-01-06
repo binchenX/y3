@@ -29,7 +29,8 @@ class HappyRobotController < ApplicationController
   end
 
   def self.crawl
-	Douban.crawl_by_artist   
+#	Douban.crawl_events_by_artist   
+	Douban.crawl_albums_by_artist   
   end	
  
 
@@ -89,7 +90,33 @@ class Douban
     Time.local(year,month,day)
   end
 
-  def self.crawl_by_artist
+  def self.crawl_albums_by_artist
+
+    Artist.all.each do |artist|
+      puts "search albums for " + artist.name
+
+      Doubapi.search_albums_of(artist.name, "2010.01").each do |album|
+		  puts album.author        
+          puts album.release_date  
+          puts album.title         
+          puts album.link   
+
+		  post_title = "[#{album.author}] #{album.title}"
+    	  markdown_content = album.title	
+        if Post.find_all_by_name_and_title("happy_robot",post_title).empty? 
+			Post.new(:name => "happy_robot",
+        	:title => post_title,
+         	:content => markdown_content ,
+          	:tag_list => "album,专辑 ,#{album.author}",
+          	:happen_at => album.release_date 
+
+       		).save
+		end
+	  end
+	end
+  end
+
+  def self.crawl_events_by_artist
     #Let's use douban API
     Artist.all.each do |artist|
       puts "search events for " + artist.name
