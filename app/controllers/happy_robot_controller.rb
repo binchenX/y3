@@ -102,7 +102,7 @@ class Douban
           puts album.link   
 
 		  post_title = "[#{album.author}] #{album.title}"
-    	  markdown_content = album.title	
+    	  markdown_content = album.title + "\n\n" + album.link	
         if Post.find_all_by_name_and_title("happy_robot",post_title).empty? 
 			Post.new(:name => "happy_robot",
         	:title => post_title,
