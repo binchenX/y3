@@ -12,9 +12,6 @@ class HappyRobotController < ApplicationController
 
   end
 
-
-
-
   def run
 =begin
     #SJTU site has some encoding problem when working with PG database, it is fine with Sqlite
@@ -28,22 +25,21 @@ class HappyRobotController < ApplicationController
 	redirect_to posts_path
   end
 
-  def self.crawl
-  	 crawl_albums
-  	 crawl_shows
-  end	
+  class << self
 
-  def self.crawl_albums
-	Douban.crawl_albums_by_artist   
-  end 
+    def crawl_albums
+		Douban.crawl_albums_by_artist   
+    end 
 
-  def self.crawl_shows_in_shanghai
-	Douban.crawl_music_events_of_all_artists
-  end
+  	def crawl_shows_in_shanghai
+		Douban.crawl_music_events_of_all_artists
+  	end
 
-  def self.crawl_shows_by_artists
-	Douban.crawl_events_by_artist
-  end
+  	def crawl_shows_by_artists
+		Douban.crawl_events_by_artist
+	end
+  
+  end #class << self
 end
 
 Event = Struct.new :title, :link ,:date
@@ -62,7 +58,9 @@ end
 
 class Douban
 
-  def self.hosts
+  #instance method 
+  class << self
+  def hosts
     [
       "http://www.douban.com/host/yuyintang/events",
       "http://www.douban.com/host/maosh/events",
@@ -75,7 +73,7 @@ class Douban
   end
 
   #return a Nokogiri HTML object
-  def self.get url
+  def get url
     if Where.in_company?
       #proxy needed.
       Nokogiri::HTML(open(url,'User-Agent' => 'ruby'),nil, "utf-8")
@@ -86,7 +84,7 @@ class Douban
     #Nokogiri::HTML(open(url,'User-Agent' => 'ruby'),nil, "utf-8")
   end
 
-  def self.is_event_link? href
+  def is_event_link? href
     href.include?"event"
   end
 
@@ -95,12 +93,12 @@ class Douban
   #"时间：2010年8月13日 周五 21:30 -  23:55"
   #or
   #2010-08-13F21:30:00+08:00
-  def self.parse_date date
+  def parse_date date
     year, month , day = date.scan(/\d{1,4}/)
     Time.local(year,month,day)
   end
 
-  def self.crawl_albums_by_artist
+  def crawl_albums_by_artist
 
     Artist.all.each do |artist|
       puts "search albums for " + artist.name
@@ -127,7 +125,7 @@ class Douban
   end
 
 
-  def self.save_show_events events ,who="AllArtists"
+  def save_show_events events ,who="AllArtists"
 	
 	events.each do |event|
         puts event.title
@@ -151,13 +149,13 @@ class Douban
 	end
   end
 
-  def self.crawl_music_events_of_all_artists
+  def crawl_music_events_of_all_artists
   
       e = Doubapi.search_events_of("all")
       save_show_events e
   end
 
-  def self.crawl_events_by_artist
+  def crawl_events_by_artist
     #Let's use douban API
     Artist.all.each do |artist|
       puts "search events for " + artist.name
@@ -166,10 +164,12 @@ class Douban
 	  #comment out :tag_list when test
 	  #e = search_events_of "许巍"
       #e = search_events_of "野孩子" 
-      save_show_events e, who
+      save_show_events e,artist.name 
       
 	 end
   end#define crawl_by_artist
+
+end #class << self
 end
 
 
