@@ -24,4 +24,30 @@ namespace :rf do
 		puts "Finish crawling..."
 	end
 
+	desc "crawl new ablbums"
+	task :ca => :environment do 
+		puts "start crawling albums.."
+		HappyRobotController.crawl_albums
+		puts "Finish crawling albums.."
+	end
+	
+	desc "crawl live rock shows by intersted artists"
+	task :cs1 => :environment do 
+		puts "start crawling rock shows.."
+		HappyRobotController.crawl_shows_by_artists
+		puts "Finish crawling rock_shows.."
+	end
+
+	desc "crawl new live rock shows in Douban shanghai events (all artists)"
+	task :cs2 => :environment do 
+		puts "start crawling rock shows.."
+		HappyRobotController.crawl_shows_in_shanghai
+		puts "Finish crawling rock_shows.."
+	end
+	
+    desc "crawl all the live rock show information by all means"
+	task :cs => [:cs1, :cs2] do 
+		puts "craw all live shows.."
+	end
+
 end

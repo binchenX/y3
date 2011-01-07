@@ -29,11 +29,21 @@ class HappyRobotController < ApplicationController
   end
 
   def self.crawl
-#	Douban.crawl_events_by_artist   
-	Douban.crawl_albums_by_artist   
+  	 crawl_albums
+  	 crawl_shows
   end	
- 
 
+  def self.crawl_albums
+	Douban.crawl_albums_by_artist   
+  end 
+
+  def self.crawl_shows_in_shanghai
+	Douban.crawl_music_events_of_all_artists
+  end
+
+  def self.crawl_shows_by_artists
+	Douban.crawl_events_by_artist
+  end
 end
 
 Event = Struct.new :title, :link ,:date
@@ -116,22 +126,14 @@ class Douban
 	end
   end
 
-  def self.crawl_events_by_artist
-    #Let's use douban API
-    Artist.all.each do |artist|
-      puts "search events for " + artist.name
-      e = Doubapi.search_events_of artist.name
-   
-	  #comment out :tag_list when test
-	  #e = search_events_of "许巍"
-      #e = search_events_of "野孩子" 
-      e.each do |event|
+
+  def self.save_show_events events ,who="AllArtists"
+	
+	events.each do |event|
         puts event.title
         puts event.when
         puts event.where
         puts event.what
-
-  		
 
         happen_at = Douban.parse_date(event.when).strftime("%Y-%m-%d");
 		#strip the tab/space at the begin of each scentence 
@@ -142,12 +144,31 @@ class Douban
 			Post.new(:name => "happy_robot",
         	:title => event.title,
          	:content => markdown_content ,
-          	:tag_list => "show, 演出 , #{artist.name}",
+          	:tag_list => "show, 演出 , #{who}",
           	:happen_at => happen_at
        		).save
 		end
-      end
-    end
+	end
+  end
+
+  def self.crawl_music_events_of_all_artists
+  
+      e = Doubapi.search_events_of("all")
+      save_show_events e
+  end
+
+  def self.crawl_events_by_artist
+    #Let's use douban API
+    Artist.all.each do |artist|
+      puts "search events for " + artist.name
+      e = Doubapi.search_events_of artist.name
+   
+	  #comment out :tag_list when test
+	  #e = search_events_of "许巍"
+      #e = search_events_of "野孩子" 
+      save_show_events e, who
+      
+	 end
   end#define crawl_by_artist
 end
 
