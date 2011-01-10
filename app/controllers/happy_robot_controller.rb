@@ -21,10 +21,26 @@ class HappyRobotController < ApplicationController
       Cralwer_douban_events.crawl(host)
     }
 =end
-    self.crawl
+	redirect_to posts_path
+  end
+	
+  #To be used from http requst
+  def cs1 
+	HappyRobotController.crawl_shows_by_artists
 	redirect_to posts_path
   end
 
+  def cs2 
+	HappyRobotController.crawl_shows_in_shanghai
+	redirect_to posts_path
+  end
+
+  def ca
+	HappyRobotController.crawl_albums
+	redirect_to posts_path
+  end
+
+  #To be used in the Rake task
   class << self
 
     def crawl_albums
