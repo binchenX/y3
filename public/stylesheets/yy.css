@@ -7,7 +7,8 @@ body {
     border: 0;
     height: 100%;
     max-height: 100%;
-    font-family: Pmingliu,verdana,arial,sans-serif;font-size:12px;
+    font-family:"宋体",Pmingliu,verdana,arial,sans-serif;
+	font-size:13px;
     /*
       font-family: Verdana, Arial, Helvetica, "Trebuchet MS", Tahoma, Geneva, "Lucida Sans Unicode", "Lucida Grande", "MS Sans Serif", sans-serif;
     */
@@ -91,13 +92,13 @@ img {
 
     /*use the box model as  indication*/
 
-    border-left:2px solid gray;
-    border-right:2px solid gray;
-    border-top:2px solid gray;
+    /*border-left:2px solid gray;
+    border-right:2px solid gray;*/
+    border-top:1px dotted gray;
     /*border-bottom:2px solid gray;*/
     font-weight: bolder;
-    margin-top: 0px;
-    padding-top: 0px;
+    margin-top: 5px;
+    padding-top: 5px;
     /*width: 60%;*/
     height: 75px; /* carefully selected */
     background: transparent url(/images/calendar.png) no-repeat;
