@@ -34,6 +34,20 @@ body {
     margin-bottom: 60px;
 
 }
+
+#artists{
+	font-size: 120%
+}
+
+#artists tr{
+
+}
+
+#artists td{
+	height: 30px
+}
+
+
 h1 {font-size: 250%}
 
 body, p, ol, ul, td {

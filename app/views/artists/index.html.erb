@@ -5,10 +5,12 @@
 
 <hr />
 
-<table>
-<% @artists.each do |artist| %>
+<table id="artists">
+<% @artists.each_slice(6).each do |row| %>
   <tr>
+	<% row.each do |artist| %>
     <td><%= link_to artist.name, artist %></td>
+	<% end %>
   </tr>
 <% end %>
 </table>
