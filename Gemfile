@@ -15,6 +15,7 @@ gem "formtastic", "~> 1.1.0"
 gem "acts-as-taggable-on", "~> 2.0.6"
 gem "simple-rss"
 gem "doubapi" , "~> 0.0.8"
+gem "toPinyin", "~> 0.0.3"
 # Use unicorn as the web server
 # gem 'unicorn'
 
