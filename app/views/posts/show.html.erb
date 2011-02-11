@@ -15,8 +15,10 @@
 <%= link_to 'Destroy', post_path(@post), :confirm => "Are you sure?", :method => :delete %>
 <% end %>
 <!-- JiaThis Button BEGIN -->
+<!-- disable this button for better performance
 <a href="http://www.jiathis.com/share/" class="jiathis" target="_blank"><img src="http://v2.jiathis.com/code_mini/images/jiathis2.gif" border="0" id="jiathis_a" /></a>
 <script type="text/javascript" src="http://v2.jiathis.com/code_mini/jia.js" charset="utf-8"></script>
+-->
 <!-- JiaThis Button END -->
 
 <div class="post-header">
@@ -48,6 +50,8 @@ by
 
 
 
+<!-- disable home brew comments BEING -->
+<% if false %>
 <!-- show comments of this post -->
 <p>
   <%= @post.comments.size %> comments
@@ -61,6 +65,10 @@ by
 <h3>Got something to say?</h3>
 
 <%= render "comments/form" %>
+
+<% end %>
+
+<!-- disable home brew comments END -->
 
 <br />
 <div id="disqus_thread"></div>
