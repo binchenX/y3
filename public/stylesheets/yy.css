@@ -1,7 +1,7 @@
 body {
-    background-color: #A9F5F2;
+    background-color: #EFF5FB;
     color: #000000;
-    background-image: url(/images/bg_light_blue.png);
+    /*background-image: url(/images/bg_light_blue.png);*/
 
     padding: 0;
     border: 0;
@@ -97,21 +97,21 @@ img {
     border-top:1px dotted gray;
     /*border-bottom:2px solid gray;*/
     font-weight: bolder;
-    margin-top: 5px;
-    padding-top: 5px;
+    margin-top: 0px;
+    padding-top: 0px;
     /*width: 60%;*/
     height: 75px; /* carefully selected */
-    background: transparent url(/images/calendar.png) no-repeat;
+/*    background: transparent url(/images/calendar.png) no-repeat;*/
 }
 
 .post-happen-at{
     position: absolute;
-    font-weight: bold;
+    /*font-weight: bold;*/
     
 }
 .post-happen-at-year{
     position: absolute;
-    left : 35px;
+    left : 25px;
 }
 .post-happen-at-month{
 
@@ -124,7 +124,7 @@ img {
 .post-happen-at-day{
     position: absolute;
     top: 35px;
-    left: 50px;
+    left: 45px;
    
 }
 
