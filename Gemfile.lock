@@ -77,7 +77,7 @@ GEM
       activerecord (= 3.0.0)
       activeresource (= 3.0.0)
       activesupport (= 3.0.0)
-      bundler (~> 1.0.0)
+      bundler (~> 1.1.4)
       railties (= 3.0.0)
     railties (3.0.0)
       actionpack (= 3.0.0)
@@ -130,6 +130,6 @@ DEPENDENCIES
   rspec-rails (= 2.0.1)
   simple-rss
   sqlite3-ruby
-  toPinyin (~> 0.0.4)
+  toPinyin (~> 0.0.5)
   webrat
   will_paginate (~> 3.0.pre2)
