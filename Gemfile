@@ -45,7 +45,8 @@ gem "toPinyin", "~> 0.0.5"
  end
 
  group :production do
- end
+  gem 'pg' 
+end
  
 group  :test do
    gem "autotest"
