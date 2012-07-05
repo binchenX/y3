@@ -7,7 +7,6 @@ GIT
       activesupport
 
 GEM
-  remote: http://rubygems.org/
   specs:
     ZenTest (4.4.0)
     abstract (1.0.0)
