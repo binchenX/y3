@@ -1,3 +1,5 @@
+#encoding: utf-8
+
 require 'rubygems'  #a hack to require failure for nokogiri
 require 'open-uri'
 require 'nokogiri'
@@ -5,6 +7,7 @@ require 'pp'
 #require 'douban_api'
 require 'doubapi'
 require 'rdiscount'
+#encoding: utf-8
 
 class HappyRobotController < ApplicationController
   def initialize
