@@ -22,6 +22,7 @@ Yy::Application.routes.draw do
   match 'cs1' => 'happy_robot#cs1'
   match 'cs2' => 'happy_robot#cs2'
   match 'ca' =>  'happy_robot#ca'
+  match 'api' => 'posts#api'
   
   
   resources :user_sessions

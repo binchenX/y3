@@ -99,4 +99,18 @@ class PostsController < ApplicationController
 	render :layout => false
     response.headers["Content-Type"] = "application/xml; charset=utf-8" 
   end
+  
+  
+  #provide the API for client to get 
+  #curl -i "http://localhost:3000/api?tag=show&since=2012-07-30"
+  def api
+    #get the parameters
+    tag = params[:tag]
+    since = params[:since]
+    
+    puts params.inspect
+    @posts = Post.tagged_with(tag).select {|p| p.created_at.to_s > since}  
+    render :layout => false ,:json => @posts.to_json
+    
+  end 
 end
