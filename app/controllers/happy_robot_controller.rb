@@ -117,33 +117,37 @@ class Douban
     Time.local(year,month,day)
   end
 
-  def crawl_albums_by_artist
+def crawl_albums_by_artist
 
-    Artist.all.each do |artist|
-      puts "search albums for " + artist.name
+  Artist.all.each do |artist|
+    puts "search albums for " + artist.name
 
-      Doubapi.search_albums_of(:singer=>artist.name, :since=>"2010.01") do |album|
-		  puts album.author        
-          puts album.release_date  
-          puts album.title         
-          puts album.link   
+    Doubapi.search_albums_of(:singer=>artist.name, :since=>"2010.01") do |album|
+      puts album.author        
+      puts album.release_date  
+      puts album.title         
+      puts album.link   
 
-		  post_title = "[#{album.author}] #{album.title}"
-    	  markdown_content = album.title + "\n\n" + album.link	
-        if Post.find_all_by_name_and_title("happy_robot",post_title).empty? 
-			    Post.new(:name => "happy_robot",
-        	        :title => post_title,
-         	        :content => markdown_content ,
-          	      :tag_list => "album,专辑 ,#{album.author}",
-          	      :happen_at => album.release_date,
-                  :image_small => album.cover_thumbnail,
-                  :image_mid => album.cover_thumbnail,
-                  :image_big => album.cover_thumbnail
-       		).save
-		end
-	  end
-	end
-  end
+
+      #post_title = "[#{album.author}] #{album.title}"
+      #modified for iOs app - title only , no author
+      post_title = album.title
+      markdown_content = album.title + "\n\n" + album.link	
+      if Post.find_all_by_name_and_title("happy_robot",post_title).empty? 
+        Post.new(:name => "happy_robot",
+                :title => post_title,
+        	      :content => markdown_content ,
+        	      :tag_list => "album,专辑 ,#{album.author}",
+        	      :happen_at => album.release_date,
+                :image_small => album.cover_thumbnail,
+                :image_mid => album.cover_thumbnail,
+                :image_big => album.cover_thumbnail,
+                :singer => album.author
+        	).save
+      end #if not exsits
+    end #each albums
+  end#each artists
+end
 
 
   def save_show_events events ,who="AllArtists"
