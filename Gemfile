@@ -3,7 +3,7 @@ source :gemcutter
 
 gem 'rails', '3.0.0'
 
-# Bundle edge Rails instead:
+#Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem "will_paginate", "~> 3.0.pre2"
@@ -14,7 +14,7 @@ gem "haml", "~> 3.0.13"
 gem "formtastic", "~> 1.1.0"
 gem "acts-as-taggable-on", "~> 2.0.6"
 gem "simple-rss"
-gem "doubapi" , "~> 0.0.8"
+gem "doubapi" , "~> 0.1.1"
 gem "toPinyin", "~> 0.0.5"
 # Use unicorn as the web server
 # gem 'unicorn'
@@ -39,6 +39,7 @@ gem "toPinyin", "~> 0.0.5"
 	
 # end
 
+# gem 'sqlite3-ruby', :require => 'sqlite3'
  group  :development do
    gem 'rspec-rails','2.0.1'
    gem 'sqlite3-ruby', :require => 'sqlite3'

@@ -108,7 +108,7 @@ class Douban
   end
 
   #return Time object
-  #date format is
+  #date format is:s
   #"时间：2010年8月13日 周五 21:30 -  23:55"
   #or
   #2010-08-13F21:30:00+08:00
@@ -122,7 +122,7 @@ class Douban
     Artist.all.each do |artist|
       puts "search albums for " + artist.name
 
-      Doubapi.search_albums_of(artist.name, "2010.01").each do |album|
+      Doubapi.search_albums_of(:singer=>artist.name, :since=>"2010.01") do |album|
 		  puts album.author        
           puts album.release_date  
           puts album.title         
@@ -131,12 +131,14 @@ class Douban
 		  post_title = "[#{album.author}] #{album.title}"
     	  markdown_content = album.title + "\n\n" + album.link	
         if Post.find_all_by_name_and_title("happy_robot",post_title).empty? 
-			Post.new(:name => "happy_robot",
-        	:title => post_title,
-         	:content => markdown_content ,
-          	:tag_list => "album,专辑 ,#{album.author}",
-          	:happen_at => album.release_date 
-
+			    Post.new(:name => "happy_robot",
+        	        :title => post_title,
+         	        :content => markdown_content ,
+          	      :tag_list => "album,专辑 ,#{album.author}",
+          	      :happen_at => album.release_date,
+                  :image_small => album.cover_thumbnail,
+                  :image_mid => album.cover_thumbnail,
+                  :image_big => album.cover_thumbnail
        		).save
 		end
 	  end
@@ -170,7 +172,7 @@ class Douban
 
   def crawl_music_events_of_all_artists
   
-      e = Doubapi.search_events_of("all")
+      total , e = Doubapi.search_events_of(:key=>"all",:location => "shanghai")
       save_show_events e
   end
 
@@ -178,7 +180,7 @@ class Douban
     #Let's use douban API
     Artist.all.each do |artist|
       puts "search events for " + artist.name
-      e = Doubapi.search_events_of artist.name
+      total, e = Doubapi.search_events_of(:key=>artist.name,:location => "shanghai")
    
 	  #comment out :tag_list when test
 	  #e = search_events_of "许巍"
