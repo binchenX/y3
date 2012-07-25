@@ -122,7 +122,7 @@ def crawl_albums_by_artist
   Artist.all.each do |artist|
     puts "search albums for " + artist.name
 
-    Doubapi.search_albums_of(:singer=>artist.name, :since=>"2010.01") do |album|
+    Doubapi.search_albums_of(:singer=>artist.name, :since=>"1980.01") do |album|
       puts album.author        
       puts album.release_date  
       puts album.title         
@@ -140,9 +140,10 @@ def crawl_albums_by_artist
         	      :tag_list => "album,专辑 ,#{album.author}",
         	      :happen_at => album.release_date,
                 :image_small => album.cover_thumbnail,
-                :image_mid => album.cover_thumbnail,
-                :image_big => album.cover_thumbnail,
-                :singer => album.author
+                :image_mid => album.cover_big,
+                :image_big => album.cover_big,
+                :singer => album.author,
+                :link_mobile => album.mobile_site
         	).save
       end #if not exsits
     end #each albums
