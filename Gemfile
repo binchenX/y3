@@ -16,6 +16,7 @@ gem "acts-as-taggable-on", "~> 2.0.6"
 gem "simple-rss"
 gem "doubapi" , "~> 0.1.3"
 gem "toPinyin", "~> 0.0.5"
+gem "apn_on_rails"
 # Use unicorn as the web server
 # gem 'unicorn'
 
@@ -28,7 +29,6 @@ gem "toPinyin", "~> 0.0.5"
 # Bundle the extra gems:
 # gem 'bj'
 # gem 'nokogiri'
-# gem 'sqlite3-ruby', :require => 'sqlite3'
 # gem 'aws-s3', :require => 'aws/s3'
 
 # Bundle gems for the local environment. Make sure to
@@ -40,7 +40,7 @@ gem "toPinyin", "~> 0.0.5"
 # end
 
 #need to comment out before pushing to heroku
-# gem 'sqlite3-ruby', :require => 'sqlite3'
+ gem 'sqlite3-ruby', :require => 'sqlite3'
  group  :development do
    gem 'rspec-rails','2.0.1'
    gem 'sqlite3-ruby', :require => 'sqlite3'

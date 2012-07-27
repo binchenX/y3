@@ -47,5 +47,11 @@ namespace :rf do
 	task :cs => [:cs1, :cs2] do 
 		puts "craw all live shows.."
 	end
+	
+	desc "send notifications to APN"
+	task :sn => :environment do
+	  NotificationController.sendNotifications
+	  puts "send notifications"
+	end
 
 end
