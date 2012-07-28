@@ -40,7 +40,7 @@ gem "apn_on_rails"
 # end
 
 #need to comment out before pushing to heroku
- gem 'sqlite3-ruby', :require => 'sqlite3'
+# gem 'sqlite3-ruby', :require => 'sqlite3'
  group  :development do
    gem 'rspec-rails','2.0.1'
    gem 'sqlite3-ruby', :require => 'sqlite3'
