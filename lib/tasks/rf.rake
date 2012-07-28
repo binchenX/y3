@@ -48,6 +48,13 @@ namespace :rf do
 		puts "craw all live shows.."
 	end
 	
+	desc "register devices "
+	task :rd => :environment do
+	  deviceToken = "aa307ed3 76daca14 befcd16a 42535ddd 742640f5 9c067710 d91a0a48 dd6a08c4"
+	  NotificationController.registerDevice(deviceToken)
+	  puts "device #{deviceToken} registered"
+	end
+	
 	desc "send notifications to APN"
 	task :sn => :environment do
 	  NotificationController.sendNotifications
