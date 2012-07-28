@@ -42,6 +42,8 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.xml
   def create
+    #to prevent the Ads,close the channel to post from the web 
+    return
 	#TODO:check if happen_at was specifid
     @post = Post.new(params[:post].
 					 merge(:user => current_user,
