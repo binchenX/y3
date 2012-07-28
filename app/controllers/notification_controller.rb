@@ -9,7 +9,7 @@ class NotificationController < ApplicationController
       
       #if no app ,create one
       if(APN::App.count == 0 )
-        app = APN::App.create(:apn_dev_cert => File.read(configatron.apn.cert), :apn_prod_cert => nil)
+        app = APN::App.create(:apn_dev_cert => File.read(configatron.apn.cert), :apn_prod_cert => File.read(configatron.apn.cert))
       end
       
       #return the id
